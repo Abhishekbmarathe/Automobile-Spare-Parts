@@ -2,7 +2,7 @@
   "name": "shreyas",
   "version": "1.0.0",
   "description": "Spare Parts MGT",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
