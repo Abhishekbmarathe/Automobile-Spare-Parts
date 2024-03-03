@@ -1,0 +1,17 @@
+.flex {
+  display: flex;
+  align-items: center;
+}
+.just_center {
+  justify-content: center;
+}
+.between {
+  justify-content: space-between;
+}
+.around{
+  justify-content: space-around;
+}
+
+.gap-2{
+  gap: 2em;
+}

@@ -1,231 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="styles/style.css" />
-        <link
-            href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css"
-            rel="stylesheet"
-        />
-    </head>
-    <body>
-        <header>
-            <div class="logo"><a href="#">NUTS & BOLTZZ</a></div>
-            <div class="menu">
-                <a href=""><ion-icon name="close" class="close"></ion-icon></a>
-                <ul>
-                    <li><a href="#" class="under">HOME</a></li>
-                    <li><a href="#" class="under">SHOP</a></li>
-                    <li><a href="#" class="under">OUR PRODUCTS</a></li>
-                    <li><a href="#" class="under">CONTACT US</a></li>
-                    <li><a href="#" class="under">ABOUT US</a></li>
-                </ul>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet" />
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" type="text/css"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" type="text/css"
+        rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+
+
+
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/carousel.css">
+    <link rel="stylesheet" href="/styles/utils.css">
+
+
+    <title>NUTS</title>
+
+</head>
+
+<body>
+
+
+    <header>
+        <div class="logo"><a href="#">NUTS & BOLTZZ</a></div>
+        <div class="menu flex">
+            <a href=""><ion-icon name="close" class="close"></ion-icon></a>
+            <ul class="flex gap-2">
+                <li><a href="#" class="under">HOME</a></li>
+                <li><a href="#" class="under">SHOP</a></li>
+                <li><a href="#" class="under">OUR PRODUCTS</a></li>
+                <li><a href="#" class="under">CONTACT US</a></li>
+                <li><a href="#" class="under">ABOUT US</a></li>
+            </ul>
+        </div>
+        <div class="search flex">
+            <input type="text" placeholder="search products" id="input" name="input">
+            <a href="">
+                <ion-icon class="s" name="search"></ion-icon>
+            </a>
+        </div>
+        <div class="heading">
+            <ul class="flex gap-2">
+                <li><a href="#" class="under">HOME</a></li>
+                <li><a href="#" class="under">SHOP</a></li>
+                <li><a href="#" class="under">OUR PRODUCTS</a></li>
+                <li><a href="#" class="under">CONTACT US</a></li>
+                <li><a href="#" class="under">ABOUT US</a></li>
+            </ul>
+        </div>
+        <div class="heading1"><ion-icon name="menu" class="ham"></ion-icon></div>
+    </header>
+
+
+    <section>
+        <div class="slider">
+
+        </div>
+    </section>
+
+
+
+    <section class="testimonials">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="customers-testimonials" class="owl-carousel">
+
+                        <!-- Carousel items -->
+                        <div class="item">
+                            <img src="https://eauto.co.in/cdn/shop/files/12_300x.jpg?v=1622816118" alt="">
+
+                        </div>
+                        <div class="item">
+                            <img src="https://eauto.co.in/cdn/shop/files/10_300x.jpg?v=1622816118" alt="">
+
+                        </div>
+                        <div class="item">
+                            <img src="https://eauto.co.in/cdn/shop/files/4_31140204-a20c-43b5-a14a-500ead3859a2_300x.jpg?v=1622816118"
+                                alt="">
+                        </div>
+                        <div class="item">
+                            <img src="https://eauto.co.in/cdn/shop/files/2_840bc835-2c86-48ee-9eb3-d161b28921a5_300x.jpg?v=1622816136"
+                                alt="">
+                        </div>
+                        <div class="item">
+                            <img src="https://eauto.co.in/cdn/shop/files/6_6532dedf-9ddc-4367-a817-7991b1f0e745_300x.jpg?v=1622816118"
+                                alt="">
+                        </div>
+                        <div class="items">
+                            <img src="https://eauto.co.in/cdn/shop/files/8_300x.jpg?v=1622816118" alt="">
+                        </div>
+                        <div class="items">
+                            <img src="https://eauto.co.in/cdn/shop/files/5_ef93601e-e848-4fce-b9b9-9480b8d5597e_300x.jpg?v=1622816118"
+                                alt="">
+                        </div>
+                        <div class="items">
+                            <img src="https://eauto.co.in/cdn/shop/files/3_300x.jpg?v=1622816136" alt="">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="search">
-                <a href=""
-                    ><input
-                        type="text"
-                        placeholder="search products"
-                        id="input"
-                    />
-                    <ion-icon class="s" name="search"></ion-icon>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <footer class="flex">
+        <div class="footer0">
+            <h1>NUTS & BOLTZZ</h1>
+        </div>
+        <div class="footer1">
+            Connect with us at
+            <div class="social-media">
+                <a href="#"> <ion-icon name="logo-facebook"></ion-icon> </a>
+                <a href="#"> <ion-icon name="logo-linkedin"></ion-icon> </a>
+                <a href="#"> <ion-icon name="logo-youtube"></ion-icon> </a>
+                <a href="#">
+                    <ion-icon name="logo-instagram"></ion-icon>
                 </a>
+                <a href="#"> <ion-icon name="logo-twitter"></ion-icon> </a>
             </div>
+        </div>
+        <div class="footer2">
+            <div class="product">
+                <div class="heading">Products</div>
             </div>
-    <div class="heading">
-        <ul>
-            <li><a href="#" class="under">HOME</a></li>
-            <li><a href="#" class="under">SHOP</a></li>
-            <li><a href="#" class="under">OUR PRODUCTS</a></li>
-            <li><a href="#" class="under">CONTACT US</a></li>
-            <li><a href="#" class="under">ABOUT US</a></li>
-        </ul>
-    </div>
-    <div class="heading1"><ion-icon name="menu" class="ham"></ion-icon></d>
-            
-        </header>
-        <section>
-            <div class="section">
-                <div class="section1">
-                    <div class="img-slider">
-                        <img
-                            src=""
-                            alt="hiiiiiiiiiiiiiiiii"
-                            class="img"
-                        />
-                        <img
-                            src=""
-                            alt="hiiiiiiiiiiiiiiiii"
-                            class="img"
-                        />
-                        <img
-                            src=""
-                            alt="hiiiiiiiiiiiiiiiii"
-                            class="img"
-                        />
-                        <img
-                            src=""
-                            alt="hiiiiiiiiiiiiiiiii"
-                            class="img"
-                        />
-                        <img
-                            src=""
-                            alt="hiiiiiiiiiiiiiiiii"
-                            class="img"
-                        />
-                    </div>
-                </div>
-                <button class="btn1" onclick="" value=""><</button>
-                <button class="btn2" onclick="" value="">></button>
-                <div class="corousel">
-                <div class="section2">
-                    <div class="container">
-                        <div class="items">
-                            <div class="img img1">
-                                <img
-                                    src="https://eauto.co.in/cdn/shop/files/12_300x.jpg?v=1622816118"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="name"></div>
-                            <!-- <div class="price">$5</div> -->
-                            <!-- <div class="info"> Lorem ipsum dolor sit amet consectetur.</div> -->
-                            <!-- <a href="#" class="under">BUY NOW</a> -->
-                            <!-- <a href="#" class="under">BUY NOW</a> -->
-                        </div>
-                        <div class="items">
-                            <div class="img img2">
-                                <img
-                                    src="https://eauto.co.in/cdn/shop/files/10_300x.jpg?v=1622816118"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="name"></div>
-                            <!-- <div class="price">$6.34</div> -->
-                            <!-- <div class="info">Lorem ipsum dolor sit.</div> -->
-                        </div>
-                        <div class="items">
-                            <div class="img img3">
-                                <img
-                                    src="https://eauto.co.in/cdn/shop/files/4_31140204-a20c-43b5-a14a-500ead3859a2_300x.jpg?v=1622816118"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="name"></div>
-                            <!-- <div class="price">$9</div> -->
-                            <!-- <div class="info">Lorem ipsum dolor sit amet.</div> -->
-                        </div>
-                        <div class="items">
-                            <div class="img img1">
-                                <img
-                                    src="https://eauto.co.in/cdn/shop/files/2_840bc835-2c86-48ee-9eb3-d161b28921a5_300x.jpg?v=1622816136"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="name"></div>
-                            <!-- <div class="price">$9.1</div> -->
-                            <!-- <div class="info">Lorem ipsum dolor sit.</div> -->
-                        </div>
-                        <div class="items">
-                            <div class="img img1">
-                                <img
-                                    src="https://eauto.co.in/cdn/shop/files/6_6532dedf-9ddc-4367-a817-7991b1f0e745_300x.jpg?v=1622816118"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="name"></div>
-                            <!-- <div class="price">$20</div> -->
-                            <!-- <div class="info">Lorem ipsum dolor sit.</div> -->
-                        </div>
-                        <div class="items">
-                            <div class="img img1">
-                                <img
-                                    src="https://eauto.co.in/cdn/shop/files/8_300x.jpg?v=1622816118"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="name"></div>
-                            <!-- <div class="price">$18</div> -->
-                            <!-- <div class="info">Lorem ipsum dolor sit amet consectetur.</div> -->
-                        </div>
-                        <div class="items">
-                            <div class="img img1">
-                                <img
-                                    src="https://eauto.co.in/cdn/shop/files/5_ef93601e-e848-4fce-b9b9-9480b8d5597e_300x.jpg?v=1622816118"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="name"></div>
-                            <!-- <div class="price">$6.7</div> -->
-                            <!-- <div class="info">Lorem ipsum dolor sit.</div> -->
-                        </div>
-                        <div class="items">
-                            <div class="img img1">
-                                <img
-                                    src="https://eauto.co.in/cdn/shop/files/3_300x.jpg?v=1622816136"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="name"></div>
-                            <!-- <div class="price">$10</div> -->
-                            <!-- <div class="info"> Lorem ipsum dolor sit amet consecteturadipisicing elit.</div> -->
-                        
-                        </div>
-                    </div>
-                </div>
-                </div>
+            <div class="services">
+                <div class="heading">Services</div>
+                <div class="div">Return</div>
+                <div class="div">Cash Back</div>
+                <div class="div">Others</div>
             </div>
-        </section>
-        <footer>
-            <div class="footer0"><h1>NUTS & BOLTZZ</h1></div>
-            <div class="footer1">
-                Connect with us at
-                <div class="social-media">
-                    <a href="#"> <ion-icon name="logo-facebook"></ion-icon> </a>
-                    <a href="#"> <ion-icon name="logo-linkedin"></ion-icon> </a>
-                    <a href="#"> <ion-icon name="logo-youtube"></ion-icon> </a>
-                    <a href="#">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                    <a href="#"> <ion-icon name="logo-twitter"></ion-icon> </a>
-                </div>
+            <div class="Company">
+                <div class="heading">Company</div>
+                <div class="div">Complaint</div>
+                <div class="div">Support</div>
             </div>
-            <div class="footer2">
-                <div class="product">
-                    <div class="heading">Products</div>
-                  
-                </div>
-                <div class="services">
-                    <div class="heading">Services</div>
-                    <div class="div">Return</div>
-                    <div class="div">Cash Back</div>
-                   
-                    <div class="div">Others</div>
-                </div>
-                <div class="Company">
-                    <div class="heading">Company</div>
-                    <div class="div">Complaint</div>
-                  
-                    <div class="div">Support</div>
-                </div>
-                <div class="Get Help">
-                    <div class="heading">Get Help</div>
-                    <div class="div">Help Center</div>
-                    <div class="div">Privacy Policy</div>
-                    <div class="div">Terms</div>
-                    <div class="div">Login</div>
-                </div>
+            <div class="Get Help">
+                <div class="heading">Get Help</div>
+                <div class="div">Help Center</div>
+                <div class="div">Privacy Policy</div>
+                <div class="div">Terms</div>
+                <div class="div">Login</div>
             </div>
-            <div class="footer3">
-                Copyright ©
-                <h4>NUTS & BOLTS</h4>
-                2021-2028
-            </div>
-        </footer>
-        <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-        <script src="./ecommerce.js"></script>
-    </body>
+        </div>
+        <div class="footer3">
+            Copyright ©
+            <h4>NUTS & BOLTS</h4>
+            2021-2028
+        </div>
+    </footer>
+    <script src="/js/script.js"></script>
+</body>
+
 </html>
