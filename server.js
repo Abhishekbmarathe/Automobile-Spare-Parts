@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { 
   res.render("index.ejs")
 })
 
@@ -30,9 +30,9 @@ app.post("/parts", (req, res) => {
   res.render("parts");
 })
 
-// app.post("/buy",(req,res)=>{
-//   res.render("buy");
-// })
+app.post("/buy", (req,res) => {
+  res.render("buy");
+})
 
 
 
