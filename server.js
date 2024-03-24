@@ -30,6 +30,10 @@ app.post("/parts", (req, res) => {
   res.render("parts");
 })
 
+// app.post("/buy",(req,res)=>{
+//   res.render("buy");
+// })
+
 
 
 
