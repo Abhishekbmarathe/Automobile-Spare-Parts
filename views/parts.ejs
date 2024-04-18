@@ -17,33 +17,43 @@
 
     <!-- header -->
     <%- include('nav'); -%>
-    
+
 
 
 
 
         <section>
-            <h1 class="center" style="margin: 2em 0;">Brands</h1>
+            <h1 class="center" style="margin: 2em 0;">BRANDS</h1>
             <div class="container">
                 <div class="cards flex around">
                     <div class="imgs">
                         <img src="https://eauto.co.in/cdn/shop/collections/4_cad9e4e7-7f45-407f-a84a-60a6338bac07_280x.jpg?v=1616925351" alt="">
                         <div class="overlay flex column">
-                            <button class="btn">Parts</button>
-                            <button class="btn">Accessories</button>
+                            <form action="/buy" method="post">
+                                <button class="btn">Parts</button>
+                            </form>>
+                            <form action="/accessories" method="post">
+                                <button class="btn">Accessories</button>
+                            </form>
                         </div>
                     </div>
                     <div class="imgs">
                         <img src="https://eauto.co.in/cdn/shop/collections/dominar-400_280x.jpg?v=1616925194" alt="">
                         <div class="overlay flex column">
-                            <button class="btn">Parts</button>
-                            <button class="btn">Accessories</button>
+                            <form action="/buy" method="post">
+                                <button class="btn">Parts</button>
+                            </form>
+                            <form action="/accessories" method="post">
+                                <button class="btn">Accessories</button>
+                            </form>
                         </div>
                     </div>
                     <div class="imgs">
-                        <img src="https://eauto.co.in/cdn/shop/collections/Untitled_design_6_280x.jpg?v=1616925134" alt="">
+                        <img src="https://eauto.co.in/cdn/shop/collections/2_280x.jpg?v=1616925128" alt="">
                         <div class="overlay flex column">
-                            <button class="btn">Parts</button>
+                            <form action="/buy" method="post">
+                                <button class="btn">Parts</button>
+                            </form>
                             <button class="btn">Accessories</button>
                         </div>
                     </div>
@@ -62,7 +72,8 @@
 
 
         <script src="/js/parts.js"></script>
-        
+
+
         <%- include('footer'); -%>
 </body>
 
