@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 import login from './models/login.js';
 import nodemailer from 'nodemailer';
 import OTPGenerator from 'otp-generator';
