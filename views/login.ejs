@@ -279,15 +279,15 @@
     <!-- partial:index.partial.html -->
     <div class="container">
         <header>Login Form</header>
-        <form action="#">
+        <form action="/userlogin" method="post">
             <div class="field email-field">
                 <div class="input-field">
-                    <input type="email" placeholder="Enter your email" class="email" required />
+                    <input type="email" placeholder="Enter your email" class="email" name="email" required />
                 </div>
                 <span class="error email-error">
-        <i class="bx bx-error-circle error-icon"></i>
-        <p class="error-text">Please enter a valid email</p>
-      </span>
+                    <i class="bx bx-error-circle error-icon"></i>
+                    <p class="error-text">Please enter a valid email</p>
+                </span>
             </div>
             <div class="field create-password">
                 <div class="input-field">
@@ -295,39 +295,94 @@
                     <i class="bx bx-hide show-hide"></i>
                 </div>
                 <span class="error password-error">
-        <i class="bx bx-error-circle error-icon"></i>
-        <p class="error-text">
-          Please enter atleast 8 charatcer with number, symbol, small and
-          capital letter.
-        </p>
-      </span>
+                    <i class="bx bx-error-circle error-icon"></i>
+                    <p class="error-text">
+                        Please enter atleast 8 charatcer with number, symbol, small and
+                        capital letter.
+                    </p>
+                </span>
             </div>
             <div class="field confirm-password">
                 <div class="input-field">
-                    <input type="password" placeholder="Confirm Password" class="cPassword" required />
+                    <input type="password" placeholder="Confirm Password" class="cPassword" name="password" required />
                     <i class="bx bx-hide show-hide"></i>
                 </div>
                 <span class="error cPassword-error">
-        <i class="bx bx-error-circle error-icon"></i>
-        <p class="error-text">Password didn't match</p>
-      </span>
+                    <i class="bx bx-error-circle error-icon"></i>
+                    <p class="error-text">Password didn't match</p>
+                </span>
             </div>
-            <div class="links">
-                <a href="#">Forgot Password</a>
-                <a href="signup.html">Signup</a>
-            </div>
+
             <div class="input-field button">
                 <input type="submit" value="Login Now" />
             </div>
         </form>
+        <div class="links">
+            <!-- <a href="#"></a> -->
+            <form action="/forgot" method="post">
+                <button>Forgot Password</button>
+            </form>
+            <a>
+                <form action="/signup" method="post">
+                    <button type="submit">Signup</button>
+                </form>
+            </a>
+        </div>
     </div>
 
     <!-- partial -->
     <!-- <script src="./script2.js"></script> -->
 
     <!-- <script src="/js/script1.js"></script> -->
-    <script src="/js/script2.js"></script>
+    <!-- <script src="/js/script2.js"></script> -->
 
 </body>
 
 </html>
+<script>
+    // JavaScript code to add attributes and functionality to the "Forgot Password" form
+
+    // Create the "Forgot Password" form element
+    const forgotPasswordForm = document.createElement('form');
+
+    // Add action and method attributes to the "Forgot Password" form
+    forgotPasswordForm.setAttribute('action', '/forgot');
+    forgotPasswordForm.setAttribute('method', 'post');
+
+    // Create input element for the email (invisible)
+    const emailInput = document.createElement('input');
+    emailInput.setAttribute('type', 'text');
+    emailInput.setAttribute('name', 'email'); // Set the name attribute to match the server-side expectation
+
+    // Get the value of the email input from the upper form
+    const emailFromUpperForm = document.querySelector('.container input.email').value;
+
+    // Set the value of the invisible input box to the email from the upper form
+    emailInput.setAttribute('value', emailFromUpperForm);
+
+    // Append the email input to the "Forgot Password" form
+    forgotPasswordForm.appendChild(emailInput);
+
+    // // Create input element for the "Forgot Password" button
+    // const forgotPasswordButton = document.createElement('input');
+    // forgotPasswordButton.setAttribute('type', 'button');
+    // forgotPasswordButton.setAttribute('value', 'Forgot Password');
+
+    // Add click event listener to the "Forgot Password" button
+    forgotPasswordButton.addEventListener('click', function () {
+        // Submit the "Forgot Password" form when the button is clicked
+        forgotPasswordForm.submit();
+    });
+
+    // Append the button to the "Forgot Password" form
+    forgotPasswordForm.appendChild(forgotPasswordButton);
+    localStorage.setItem('forgotPasswordEmail', "emailFromUpperForm");
+
+    // Find the container element where you want to insert the "Forgot Password" form
+    const linksContainer = document.querySelector('.container .links');
+
+    // Insert the "Forgot Password" form as the first child of the container
+    linksContainer.insertBefore(forgotPasswordForm, linksContainer.firstChild);
+
+    console.log(emailInput.value);
+</script>
