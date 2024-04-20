@@ -108,6 +108,8 @@ form .input-field {
   color: white;
   border: 1.5px solid #00b4f6;
 }
+
+
 .invalid input {
   border-color: #00aaff;
 }
