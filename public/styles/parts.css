@@ -16,7 +16,7 @@ body {
     width: 240px;
     height: 300px;
     border-radius: 12px;
-    box-shadow: -1px 10px 38px rgb(240, 239, 239);
+    box-shadow: -1px 10px 38px rgb(153, 147, 147);
     cursor: pointer;
     transition: transform .3s linear;
     position: relative;
