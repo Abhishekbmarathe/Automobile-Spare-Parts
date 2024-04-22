@@ -1,29 +1,25 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import path from 'path';
-import mongoose from 'mongoose';
-// import bcrypt from 'bcrypt';
-import login from './models/login.js';
-import nodemailer from 'nodemailer';
-import OTPGenerator from 'otp-generator';
+import express from 'express'; // Importing Express.js framework
+import bodyParser from 'body-parser'; // Middleware for parsing request bodies
+import path from 'path'; // Module for handling file paths
+import mongoose from 'mongoose'; // MongoDB object modeling tool
+// import bcrypt from 'bcrypt'; // Library for hashing passwords
+import login from './models/login.js'; // Importing login model (Assuming it's a Mongoose model)
+import nodemailer from 'nodemailer'; // Library for sending emails
+import OTPGenerator from 'otp-generator'; // Library for generating OTPs
 
-
-
-const app = express()
-const port = 3001
-
+const app = express() // Creating an Express application
+const port = 3001 // Setting the port number
 
 // Body parsing middleware for handling form submissions
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// setting ejs template engine
+// Setting EJS template engine and static file directory
 app.set('view engine', 'ejs')
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// database connection
+// Database connection
 mongoose.connect("mongodb+srv://shreyask253:arwK7keJwYJUZNBq@spare-db.q71dn1b.mongodb.net/?retryWrites=true&w=majority&appName=spare-db")
     .then(() => {
         console.log("MONGODB connected Successfully...");
@@ -32,45 +28,55 @@ mongoose.connect("mongodb+srv://shreyask253:arwK7keJwYJUZNBq@spare-db.q71dn1b.mo
         console.log("MONGODB connection Failed...", e);
     })
 
-
-
+// Route for rendering the home page
 app.get('/', (req, res) => {
-    res.render("index.ejs")
+    res.render("index.ejs");
 })
 
+// Route for rendering the login page
 app.post('/login', (req, res) => {
-    res.render("login.ejs")
+    res.render("login.ejs");
 })
 
+// Route for rendering the login page (possibly a typo in route)
 app.post('/log', (req, res) => {
-    res.render("login.ejs")
+    res.render("login.ejs");
 })
 
+
+
+
+// Route for rendering the signup page
 app.post("/signup", (req, res) => {
     res.render("signup");
 })
 
+// Route for rendering the parts page
 app.post("/parts", (req, res) => {
     res.render("parts");
 })
 
+// Route for rendering the buy page
 app.post("/buy", (req, res) => {
     res.render("buy");
 })
+
+// Route for rendering the accessories page
 app.post("/accessories", (req, res) => {
     res.render("accessories");
 })
+
+// Route for handling user sign up
 app.post("/usersignin", async (req, res) => {
-
     const data = req.body;
-    const Login = new login(data);
-    await Login.save();
-    console.log(req.body);
-    res.render("home");
-
+    const Login = new login(data); // Creating a new login instance with user data
+    await Login.save(); // Saving the user data to the database
+    console.log(req.body); // Logging the user data
+    res.render("home"); // Rendering the home page after signup
 })
-app.post("/userlogin", async (req, res) => {
 
+// Route for handling user login
+app.post("/userlogin", async (req, res) => {
     const { email, password } = req.body;
     try {
         // Find user by email
@@ -80,12 +86,12 @@ app.post("/userlogin", async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Compare passwords
+        // Compare passwords (Not recommended to compare plain passwords, use bcrypt for hashing)
         if (user.password !== password) {
             return res.status(401).json({ message: "Invalid password" });
         }
 
-        // Passwords match, authentication successful
+        // Passwords match, authentication successful, render home page
         res.render("home");
 
     } catch (error) {
@@ -94,21 +100,13 @@ app.post("/userlogin", async (req, res) => {
     }
 });
 
-
-
+// Route for rendering the forgot password page
 app.post("/forgot", (req, res) => {
     console.log(req.body);
     res.render("forgotpass");
 })
 
-
-
-
-
-
-
-// otp section
-// Generate and send OTP to user's email
+// Route for generating and sending OTP to user's email
 app.post('/otp', async (req, res) => {
     try {
         const { email } = req.body;
@@ -130,13 +128,13 @@ app.post('/otp', async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'your.email@gmail.com',
-                pass: 'your-email-password'
+                user: 'your.email@gmail.com', // Replace with your email
+                pass: 'your-email-password' // Replace with your email password
             }
         });
 
         await transporter.sendMail({
-            from: 'your.email@gmail.com',
+            from: 'your.email@gmail.com', // Replace with your email
             to: email,
             subject: 'One Time Password (OTP)',
             text: `Your OTP is: ${otp}`
@@ -149,11 +147,7 @@ app.post('/otp', async (req, res) => {
     }
 });
 
-
-
-
-
-
+// Start the server
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
