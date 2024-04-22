@@ -42,6 +42,10 @@ app.post('/login', (req, res) => {
     res.render("login.ejs")
 })
 
+app.post('/log', (req, res) => {
+    res.render("login.ejs")
+})
+
 app.post("/signup", (req, res) => {
     res.render("signup");
 })
