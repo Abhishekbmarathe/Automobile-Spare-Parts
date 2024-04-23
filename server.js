@@ -81,35 +81,35 @@ app.post("/useradress", (req, res) => {
     res.render("useradress");
 })
 
- 
 
 
- // Route for rendering the cardspay page
- app.post("/cardspay", (req, res) => {
+
+// Route for rendering the cardspay page
+app.post("/cardspay", (req, res) => {
     res.render("cardspay");
 })
 
- // Route for rendering the cod page
- app.post("/cod", (req, res) => {
+// Route for rendering the cod page
+app.post("/cod", (req, res) => {
     res.render("cod");
 })
 
- // Route for rendering the oredersumary page
- app.post("/ordersummary", (req, res) => {
+// Route for rendering the oredersumary page
+app.post("/ordersummary", (req, res) => {
     res.render("ordersummary");
 })
 
- // Route for rendering the payment page
- app.post("/paymentmode", (req, res) => {
+// Route for rendering the payment page
+app.post("/paymentmode", (req, res) => {
     res.render("paymentmode");
 })
 
- // Route for rendering the upi page
- app.post("/upi", (req, res) => {
+// Route for rendering the upi page
+app.post("/upi", (req, res) => {
     res.render("upi");
 })
 
- 
+
 
 // Route for handling user sign up
 app.post("/usersignin", async (req, res) => {
@@ -126,6 +126,13 @@ app.post("/userlogin", async (req, res) => {
     try {
         // Find user by email
         const user = await login.findOne({ email });
+        if (req.body.email == "supplier@gmail.com") {
+            if (user.password == req.body.password) {
+                res.render("supplier");
+            }else{
+                res.send("<script>alert('invalid password')</script>")
+            }
+        }
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });
@@ -135,6 +142,7 @@ app.post("/userlogin", async (req, res) => {
         if (user.password !== password) {
             return res.status(401).json({ message: "Invalid password" });
         }
+
 
         // Passwords match, authentication successful, render home page
         res.render("home");
