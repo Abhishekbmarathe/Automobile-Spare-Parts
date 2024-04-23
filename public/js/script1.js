@@ -52,23 +52,23 @@ eyeIcons.forEach((eyeIcon) => {
   });
 });
 
-// // Password Validation+
-// function createPass() {
-//   const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+// Password Validation+
+function createPass() {
+  const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-//   if (!passInput.value.match(passPattern)) {
-//     return passField.classList.add("invalid"); //adding invalid class if password input value do not match with passPattern
-//   }
-//   passField.classList.remove("invalid"); //removing invalid class if password input value matched with passPattern
-// }
+  if (!passInput.value.match(passPattern)) {
+    return passField.classList.add("invalid"); //adding invalid class if password input value do not match with passPattern
+  }
+  passField.classList.remove("invalid"); //removing invalid class if password input value matched with passPattern
+}
 
-// // // Confirm Password Validtion
-// function confirmPass() {
-//   if (passInput.value !== cPassInput.value || cPassInput.value === "") {
-//     return cPassField.classList.add("invalid");
-//   }
-//   cPassField.classList.remove("invalid");
-// }
+// // Confirm Password Validtion
+function confirmPass() {
+  if (passInput.value !== cPassInput.value || cPassInput.value === "") {
+    return cPassField.classList.add("invalid");
+  }
+  cPassField.classList.remove("invalid");
+}
 
 // // Calling Funtion on Form Sumbit
 // form.addEventListener("submit", (e) => {
