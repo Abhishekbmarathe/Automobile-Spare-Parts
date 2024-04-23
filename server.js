@@ -51,6 +51,11 @@ app.post("/signup", (req, res) => {
     res.render("signup");
 })
 
+// Route for rendering the about page
+app.post("/about", (req, res) => {
+    res.render("about");
+})
+
 // Route for rendering the parts page
 app.post("/parts", (req, res) => {
     res.render("parts");
