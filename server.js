@@ -71,6 +71,46 @@ app.post("/accessories", (req, res) => {
     res.render("accessories");
 })
 
+// Route for rendering the purchase page
+app.post("/purchase", (req, res) => {
+    res.render("purchase");
+})
+
+// Route for rendering the user adress page
+app.post("/useradress", (req, res) => {
+    res.render("useradress");
+})
+
+ 
+
+
+ // Route for rendering the cardspay page
+ app.post("/cardspay", (req, res) => {
+    res.render("cardspay");
+})
+
+ // Route for rendering the cod page
+ app.post("/cod", (req, res) => {
+    res.render("cod");
+})
+
+ // Route for rendering the oredersumary page
+ app.post("/ordersummary", (req, res) => {
+    res.render("ordersummary");
+})
+
+ // Route for rendering the payment page
+ app.post("/payment", (req, res) => {
+    res.render("payment");
+})
+
+ // Route for rendering the upi page
+ app.post("/upi", (req, res) => {
+    res.render("upi");
+})
+
+ 
+
 // Route for handling user sign up
 app.post("/usersignin", async (req, res) => {
     const data = req.body;

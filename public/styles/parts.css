@@ -44,9 +44,9 @@ body {
     /* transform: translateY(-300px); */
 }
 
-.imgs:hover .overlay {
+/* .imgs:hover .overlay {
     transform: translateY(-300px);
-}
+} */
 
 .btn {
     border: none;
