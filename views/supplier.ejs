@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supplier Dashboard</title>
+<!-- Link to CSS file for styling -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <!-- Logo and Website Name -->
+            <h1>PartsRUs</h1>
+        </div>
+        <ul class="nav-links">
+            <!-- Navigation Links -->
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="dashboard">
+        <h2>Dashboard</h2>
+        <!-- Dashboard Content -->
+        <p>Welcome to the supplier dashboard. Here you can manage your products and orders.</p>
+        <a href="#" class="btn">Add New Product</a>
+        <!-- Placeholder for other dashboard features -->
+    </section>
+
+    <section class="products">
+        <h2>Products</h2>
+        <!-- Add New Product Form -->
+        <form id="addProductForm">
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName" required><br>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea><br>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required><br>
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Electronics">Electronics</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Automotive">Automotive</option>
+                <!-- Add more options as needed -->
+            </select><br>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image"><br>
+            <label for="stock">Stock Availability:</label>
+            <input type="checkbox" id="stock" name="stock" checked><br>
+            <button type="submit">Add Product</button>
+        </form>
+        <!-- Product Listing Table -->
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock Availability</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Product rows will be dynamically populated here -->
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <!-- Footer content if needed -->
+</footer>
+
+<!-- Link to JavaScript file for interactivity -->
+<script src="script.js"></script>
+</body>
+</html>
