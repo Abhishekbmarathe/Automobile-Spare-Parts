@@ -100,8 +100,8 @@ app.post("/useradress", (req, res) => {
 })
 
  // Route for rendering the payment page
- app.post("/payment", (req, res) => {
-    res.render("payment");
+ app.post("/paymentmode", (req, res) => {
+    res.render("paymentmode");
 })
 
  // Route for rendering the upi page
