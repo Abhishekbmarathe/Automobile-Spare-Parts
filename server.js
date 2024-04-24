@@ -4,6 +4,7 @@ import path from 'path'; // Module for handling file paths
 import mongoose from 'mongoose'; // MongoDB object modeling tool
 // import bcrypt from 'bcrypt'; // Library for hashing passwords
 import login from './models/login.js'; // Importing login model (Assuming it's a Mongoose model)
+import parts from './models/parts.js'
 import nodemailer from 'nodemailer'; // Library for sending emails
 import OTPGenerator from 'otp-generator'; // Library for generating OTPs
 
@@ -124,40 +125,50 @@ app.post("/usersignin", async (req, res) => {
 app.post("/userlogin", async (req, res) => {
     const { email, password } = req.body;
     try {
-        // Find user by email
         const user = await login.findOne({ email });
-        if (req.body.email == "supplier@gmail.com") {
-            if (user.password == req.body.password) {
-                res.render("supplier");
-            }else{
-                res.send("<script>alert('invalid password')</script>")
-            }
-        }
-
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).send("User not found");
         }
 
-        // Compare passwords (Not recommended to compare plain passwords, use bcrypt for hashing)
-        if (user.password !== password) {
-            return res.status(401).json({ message: "Invalid password" });
+        if (email == "supplier@gmail.com" && user.password === password) {
+            const data = await parts.find();
+            return res.render("supplier", { data });  // Correctly pass data within an object
+        } else if (user.password !== password) {
+            return res.status(401).send("Invalid password");
         }
 
-
-        // Passwords match, authentication successful, render home page
         res.render("home");
-
     } catch (error) {
         console.error("Error:", error);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).send("Internal server error");
     }
 });
 
+app.post("/add", async (req, res) => {
+    try {
+        const product = new parts(req.body);
+        await product.save();
+        const data = await parts.find();
+        console.log(data);
+        res.render("supplier", { data });  // Correctly pass data within an object
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
+
+
+
+
+
+
+
+
 // Route for rendering the forgot password page
-app.post("/forgot", (req, res) => {
-    console.log(req.body);
-    res.render("forgotpass");
-})
+// app.post("/forgot", (req, res) => {
+//     console.log(req.body);
+//     res.render("forgotpass");
+// })
 
 // Route for generating and sending OTP to user's email
 app.post('/otp', async (req, res) => {
