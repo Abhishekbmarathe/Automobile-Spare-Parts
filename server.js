@@ -1,4 +1,3 @@
-
 import express from 'express'; // Importing Express.js framework
 import bodyParser from 'body-parser'; // Middleware for parsing request bodies
 import path from 'path'; // Module for handling file paths
@@ -8,7 +7,7 @@ import login from './models/login.js'; // Importing login model (Assuming it's a
 import parts from './models/parts.js'
 import nodemailer from 'nodemailer'; // Library for sending emails
 import OTPGenerator from 'otp-generator'; // Library for generating OTPs
-
+import { ObjectId } from 'mongodb';
 const app = express() // Creating an Express application
 const port = 3001 // Setting the port number
 
@@ -158,9 +157,24 @@ app.post("/add", async (req, res) => {
 });
 
 
+app.post('/delete', async (req, res) => {
+    try {
+        const productId = req.body.productId; // Ensure you're accessing the right property from the body
+        console.log(productId);
 
-
-
+        const result = await parts.deleteOne({ _id: productId}); // Convert string to ObjectId
+        if (result.deletedCount === 1) {
+            console.log("Successfully deleted one document.");
+            res.render("deleted")
+        } else {
+            console.log("No documents matched the query. Deleted 0 documents.");
+            res.send("No document found with that ID."); // Inform the user
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error deleting the product.");
+    }
+});
 
 
 
@@ -214,5 +228,5 @@ app.post('/otp', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Server is running on port ${port}`)
 })
