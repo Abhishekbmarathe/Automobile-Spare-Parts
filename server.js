@@ -165,7 +165,7 @@ app.post('/delete', async (req, res) => {
         const result = await parts.deleteOne({ _id: productId}); // Convert string to ObjectId
         if (result.deletedCount === 1) {
             console.log("Successfully deleted one document.");
-            res.render("deleted")
+            res.send("deleted")
         } else {
             console.log("No documents matched the query. Deleted 0 documents.");
             res.send("No document found with that ID."); // Inform the user
