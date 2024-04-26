@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .order-details {
+            margin-bottom: 20px;
+        }
+        .order-details h2 {
+            margin-bottom: 10px;
+        }
+        .order-details p {
+            margin: 0;
+        }
+        .items {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .items th, .items td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .items th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            margin-top: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Details</h1>
+        <div class="order-details">
+            <h2>Order Information</h2>
+            <p><strong>Order ID:</strong> ABC123</p>
+            <p><strong>Date:</strong> April 23, 2024</p>
+            <p><strong>Total Items:</strong> 3</p>
+            <p><strong>Total Amount:</strong> $40.00</p>
+        </div>
+        
+        <div class="order-details">
+            <h2>Shipping Address</h2>
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Address:</strong> 123 Main St, Cityville, State, 12345</p>
+            <p><strong>Email:</strong> john.doe@example.com</p>
+            <p><strong>Phone:</strong> 555-123-4567</p>
+        </div>
+        
+        <table class="items">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Product 1</td>
+                    <td>1</td>
+                    <td>$10.00</td>
+                    <td>$10.00</td>
+                </tr>
+                <tr>
+                    <td>Product 2</td>
+                    <td>2</td>
+                    <td>$15.00</td>
+                    <td>$30.00</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="total">
+            <p><strong>Total Amount:</strong> $40.00</p>
+        </div>
+    </div>
+</body>
+</html>

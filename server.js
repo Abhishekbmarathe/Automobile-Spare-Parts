@@ -110,6 +110,10 @@ app.post("/upi", (req, res) => {
     res.render("upi");
 })
 
+// Route for rendering the codetails page
+app.post("/codetails", (req, res) => {
+    res.render("codetails");
+})
 
 
 // Route for handling user sign up
