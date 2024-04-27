@@ -63,8 +63,9 @@ app.post("/parts", (req, res) => {
 })
 
 // Route for rendering the buy page
-app.post("/buy", (req, res) => {
-    res.render("buy");
+app.post("/buy", async (req, res) => {
+    const data = await parts.find();
+    res.render("buy", { data });
 })
 
 // Route for rendering the accessories page
@@ -115,7 +116,9 @@ app.post("/codetails", (req, res) => {
     res.render("codetails");
 })
 
-
+app.post("/buynow",(req,res)=>{
+    res.render("ordernow")
+})
 // Route for handling user sign up
 app.post("/usersignin", async (req, res) => {
     const data = req.body;
@@ -155,6 +158,7 @@ app.post("/add", async (req, res) => {
         const data = await parts.find();
         console.log(data);
         res.render("supplier", { data });  // Correctly pass data within an object
+
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -166,7 +170,7 @@ app.post('/delete', async (req, res) => {
         const productId = req.body.productId; // Ensure you're accessing the right property from the body
         console.log(productId);
 
-        const result = await parts.deleteOne({ _id: productId}); // Convert string to ObjectId
+        const result = await parts.deleteOne({ _id: productId }); // Convert string to ObjectId
         if (result.deletedCount === 1) {
             console.log("Successfully deleted one document.");
             res.send("deleted")
