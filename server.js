@@ -2,12 +2,16 @@ import express from 'express'; // Importing Express.js framework
 import bodyParser from 'body-parser'; // Middleware for parsing request bodies
 import path from 'path'; // Module for handling file paths
 import mongoose from 'mongoose'; // MongoDB object modeling tool
-// import bcrypt from 'bcrypt'; // Library for hashing passwords
 import login from './models/login.js'; // Importing login model (Assuming it's a Mongoose model)
 import parts from './models/parts.js'
 import nodemailer from 'nodemailer'; // Library for sending emails
 import OTPGenerator from 'otp-generator'; // Library for generating OTPs
-import { ObjectId } from 'mongodb';
+import session from 'express-session';
+import crypto from 'crypto';
+import { config } from 'dotenv';
+// config();
+
+
 const app = express() // Creating an Express application
 const port = 3001 // Setting the port number
 
@@ -29,18 +33,48 @@ mongoose.connect("mongodb+srv://shreyask253:arwK7keJwYJUZNBq@spare-db.q71dn1b.mo
         console.log("MONGODB connection Failed...", e);
     })
 
+
+
+// Configure session middleware
+
+// const secret = crypto.randomBytes(32).toString('hex');
+// console.log(secret);
+
+app.use(session({
+    secret: "fc9ef72da8c8b9a701c28369097b9361f5fdbc940a04c011d3028f6fbc74da23",// Choose a strong secret for session encoding
+    resave: false, // Avoid resaving sessions that haven't changed
+    saveUninitialized: false, // Don't save uninitialized sessions
+    // cookie: {
+    //     secure: process.env.NODE_ENV === "production", // Enable secure cookies in production (requires HTTPS)
+    //     maxAge: 1000 * 60 * 60 * 24 // Set cookie expiry to one day
+    // }
+}));
+
+
+function checkAuthentication(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.status(401).send('Access denied. Please login to continue.');
+    }
+}
+
+
+
+
+
 // Route for rendering the home page
 app.get('/', (req, res) => {
     res.render("index.ejs");
 })
 
 // Route for rendering the login page
-app.post('/login', (req, res) => {
+app.get('/login', (req, res) => {
     res.render("login.ejs");
 })
 
 // Route for rendering the login page (possibly a typo in route)
-app.post('/log', (req, res) => {
+app.get('/log', (req, res) => {
     res.render("login.ejs");
 })
 
@@ -48,38 +82,38 @@ app.post('/log', (req, res) => {
 
 
 // Route for rendering the signup page
-app.post("/signup", (req, res) => {
+app.get("/signup", (req, res) => {
     res.render("signup");
 })
 
 // Route for rendering the about page
-app.post("/about", (req, res) => {
+app.get("/about", (req, res) => {
     res.render("about");
 })
 
 // Route for rendering the parts page
-app.post("/parts", (req, res) => {
+app.get("/parts", (req, res) => {
     res.render("parts");
 })
 
 // Route for rendering the buy page
-app.post("/buy", async (req, res) => {
+app.get("/buy", async (req, res) => {
     const data = await parts.find();
     res.render("buy", { data });
 })
 
 // Route for rendering the accessories page
-app.post("/accessories", (req, res) => {
+app.get("/accessories", (req, res) => {
     res.render("accessories");
 })
 
 // Route for rendering the purchase page
-app.post("/purchase", (req, res) => {
+app.get("/purchase", (req, res) => {
     res.render("purchase");
 })
 
 // Route for rendering the user adress page
-app.post("/useradress", (req, res) => {
+app.get("/useradress", (req, res) => {
     res.render("useradress");
 })
 
@@ -87,36 +121,36 @@ app.post("/useradress", (req, res) => {
 
 
 // Route for rendering the cardspay page
-app.post("/cardspay", (req, res) => {
+app.get("/cardspay", (req, res) => {
     res.render("cardspay");
 })
 
 // Route for rendering the cod page
-app.post("/cod", (req, res) => {
+app.get("/cod", (req, res) => {
     res.render("cod");
 })
 
 // Route for rendering the oredersumary page
-app.post("/ordersummary", (req, res) => {
+app.get("/ordersummary", (req, res) => {
     res.render("ordersummary");
 })
 
 // Route for rendering the payment page
-app.post("/paymentmode", (req, res) => {
+app.get("/paymentmode", (req, res) => {
     res.render("paymentmode");
 })
 
 // Route for rendering the upi page
-app.post("/upi", (req, res) => {
+app.get("/upi", (req, res) => {
     res.render("upi");
 })
 
 // Route for rendering the codetails page
-app.post("/codetails", (req, res) => {
+app.get("/codetails", (req, res) => {
     res.render("codetails");
 })
 
-app.post("/buynow",(req,res)=>{
+app.get("/buynow", (req, res) => {
     res.render("ordernow")
 })
 // Route for handling user sign up
@@ -143,8 +177,9 @@ app.post("/userlogin", async (req, res) => {
         } else if (user.password !== password) {
             return res.status(401).send("Invalid password");
         }
-
+        req.session.user = { id: user._id, username: user.email }; 
         res.render("home");
+
     } catch (error) {
         console.error("Error:", error);
         res.status(500).send("Internal server error");

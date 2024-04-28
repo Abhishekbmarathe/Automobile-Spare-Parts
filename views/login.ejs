@@ -307,11 +307,11 @@
         </form>
         <div class="links">
             <!-- <a href="#"></a> -->
-            <form action="/forgot" method="post">
+            <form action="/forgot" method="get">
                 <button>Forgot Password</button>
             </form>
             <a>
-                <form action="/signup" method="post">
+                <form action="/signup" method="get">
                     <button type="submit">Signup</button>
                 </form>
             </a>
@@ -335,7 +335,7 @@
 
     // Add action and method attributes to the "Forgot Password" form
     forgotPasswordForm.setAttribute('action', '/forgot');
-    forgotPasswordForm.setAttribute('method', 'post');
+    forgotPasswordForm.setAttribute('method', 'get');
 
     // Create input element for the email (invisible)
     const emailInput = document.createElement('input');
