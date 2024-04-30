@@ -21,6 +21,9 @@ const productSchema = new mongoose.Schema({
         required: true,
        
     },
+    itemimg:{
+        type:String
+    }
     // stock: {
     //     type: Boolean,
     //     default: false // Stock is false by default, indicating not available

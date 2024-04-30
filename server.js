@@ -9,7 +9,7 @@ import OTPGenerator from 'otp-generator'; // Library for generating OTPs
 import session from 'express-session';
 import crypto from 'crypto';
 import { config } from 'dotenv';
-// config();
+import multer from 'multer';
 
 
 const app = express() // Creating an Express application
@@ -17,6 +17,7 @@ const port = 3001 // Setting the port number
 
 // Body parsing middleware for handling form submissions
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use("/resources",express.static("resources"));
 app.use(bodyParser.json());
 
 // Setting EJS template engine and static file directory
@@ -34,6 +35,19 @@ mongoose.connect("mongodb+srv://shreyask253:arwK7keJwYJUZNBq@spare-db.q71dn1b.mo
     })
 
 
+// Configure Multer's storage engine
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        // Define the destination directory for uploads
+        cb(null, path.join(__dirname, 'public', 'resources'));
+    },
+    filename: function (req, file, cb) {
+        // Define the filename for the uploaded files
+        const uniqueFileName = Date.now() + '-' + file.originalname;  // Example to avoid name conflicts
+        cb(null, uniqueFileName);
+    }
+});
+const upload = multer({ storage: storage });
 
 // Configure session middleware
 
@@ -177,7 +191,7 @@ app.post("/userlogin", async (req, res) => {
         } else if (user.password !== password) {
             return res.status(401).send("Invalid password");
         }
-        req.session.user = { id: user._id, username: user.email }; 
+        req.session.user = { id: user._id, username: user.email };
         res.render("home");
 
     } catch (error) {
@@ -186,18 +200,33 @@ app.post("/userlogin", async (req, res) => {
     }
 });
 
-app.post("/add", async (req, res) => {
+app.post("/add", upload.single('itemimg'), async (req, res) => {
     try {
-        const product = new parts(req.body);
+        // Extract only the necessary part of the path from 'resources' directory onward
+        let imagePath = req.file ? req.file.path.split('\\public\\')[1].replace(/\\/g, '/') : null;
+
+        const product = new parts({
+            ...req.body,
+            itemimg: imagePath  // store only the relative path from 'resources/'
+        });
+        
         await product.save();
         const data = await parts.find();
-        console.log(data);
-        res.render("supplier", { data });  // Correctly pass data within an object
+        console.log(product);
+        res.render("supplier", { data });  // Render the 'supplier' view with the list of products
 
     } catch (error) {
+        console.error("Error during file upload:", error);
         res.status(500).send(error.message);
     }
 });
+
+
+
+
+
+
+
 
 
 app.post('/delete', async (req, res) => {
