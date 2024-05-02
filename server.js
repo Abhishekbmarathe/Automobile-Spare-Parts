@@ -167,6 +167,11 @@ app.get("/codetails", (req, res) => {
 app.get("/buynow", (req, res) => {
     res.render("ordernow")
 })
+
+app.post("/logout", (req, res) => {
+    res.render("logout")
+})
+
 // Route for handling user sign up
 app.post("/usersignin", async (req, res) => {
     const data = req.body;
