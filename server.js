@@ -9,7 +9,10 @@ import OTPGenerator from 'otp-generator'; // Library for generating OTPs
 import session from 'express-session';
 import crypto from 'crypto';
 import { config } from 'dotenv';
+await config();
 import multer from 'multer';
+import orders from './models/orders.js'
+import Razorpay from 'razorpay';
 
 
 const app = express() // Creating an Express application
@@ -160,8 +163,9 @@ app.get("/upi", (req, res) => {
 })
 
 // Route for rendering the codetails page
-app.get("/codetails", (req, res) => {
-    res.render("codetails");
+app.get("/codetails", async (req, res) => {
+    const orderDetails = await orders.find({});
+    res.render("codetails", { orderDetails });
 })
 
 app.get("/buynow", (req, res) => {
@@ -179,6 +183,17 @@ app.post("/usersignin", async (req, res) => {
     await Login.save(); // Saving the user data to the database
     console.log(req.body); // Logging the user data
     res.render("home"); // Rendering the home page after signup
+})
+
+app.post("/submit", async (req, res) => {
+    console.log(req.body);
+
+    const order = new orders(req.body);
+    await order.save();
+
+    // console.log(await orders.find({}));
+
+    res.send("success")
 })
 
 // Route for handling user login
@@ -214,7 +229,7 @@ app.post("/add", upload.single('itemimg'), async (req, res) => {
             ...req.body,
             itemimg: imagePath  // store only the relative path from 'resources/'
         });
-        
+
         await product.save();
         const data = await parts.find();
         console.log(product);
@@ -225,12 +240,6 @@ app.post("/add", upload.single('itemimg'), async (req, res) => {
         res.status(500).send(error.message);
     }
 });
-
-
-
-
-
-
 
 
 
@@ -254,54 +263,46 @@ app.post('/delete', async (req, res) => {
 });
 
 
+// Razorpay instance
+const razorpay = new Razorpay({
+    key_id: process.env.KEY_ID, // Replace with your key id from Razorpay dashboard
+    key_secret: process.env.KEY_SECRET // Replace with your key secret
+});
+ 
+// Route to create an order
+app.post('/create-order', async (req, res) => {
+    const options = {
+        amount: req.body.amount * 100,  // amount in the smallest currency unit
+        currency: "INR",
+        receipt: "order_rcptid_11"
+    };
 
-
-// Route for rendering the forgot password page
-// app.post("/forgot", (req, res) => {
-//     console.log(req.body);
-//     res.render("forgotpass");
-// })
-
-// Route for generating and sending OTP to user's email
-app.post('/otp', async (req, res) => {
     try {
-        const { email } = req.body;
-
-        // Check if email is registered
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(404).json({ message: 'Email not found' });
-        }
-
-        // Generate OTP
-        const otp = OTPGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
-
-        // Update user's OTP in the database
-        user.otp = otp;
-        await user.save();
-
-        // Send OTP to user's email
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'your.email@gmail.com', // Replace with your email
-                pass: 'your-email-password' // Replace with your email password
-            }
-        });
-
-        await transporter.sendMail({
-            from: 'your.email@gmail.com', // Replace with your email
-            to: email,
-            subject: 'One Time Password (OTP)',
-            text: `Your OTP is: ${otp}`
-        });
-
-        res.status(200).json({ message: 'OTP sent successfully' });
+        const order = await razorpay.orders.create(options);
+        res.json(order);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).send(error);
     }
 });
+
+// Route for payment verification (optional, based on your needs)
+app.post('/verify-payment', (req, res) => {
+    const secret = process.env.KEY_SECRET; // Your secret
+
+    // Add your logic to verify payment signature
+    const crypto = require('crypto');
+    const shasum = crypto.createHmac('sha256', secret);
+    shasum.update(`${req.body.razorpay_order_id}|${req.body.razorpay_payment_id}`);
+    const digest = shasum.digest('hex');
+
+    if (digest === req.body.razorpay_signature) {
+        res.status(200).json({ message: 'Payment verified successfully' });
+    } else {
+        res.status(400).json({ message: 'Invalid signature sent' });
+    }
+});
+
+
 
 // Start the server
 app.listen(port, () => {

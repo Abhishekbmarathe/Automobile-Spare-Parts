@@ -8,6 +8,7 @@ const orderSchema = new mongoose.Schema({
     price: {
         type: String
     },
+    itemName: String,
     email: {
         type: String,
         required: true,
@@ -18,11 +19,11 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    paymentMethod: {
-        type: String,
-        required: true,
-        enum: ['credit_debit', 'upi', 'cod']
-    },
+    // paymentMethod: {
+    //     type: String,
+    //     required: true,
+    //     enum: ['credit_debit', 'upi', 'cod']
+    // },
     address: {
         type: String,
 

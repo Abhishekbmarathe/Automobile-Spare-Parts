@@ -8,7 +8,7 @@
 <style>
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #f4f4f4;
+        background-color: #dddcdc;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -81,34 +81,33 @@
     }
 
     select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    margin-top: 5px;
-}
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-top: 5px;
+    }
 
-fieldset {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 20px;
-}
+    fieldset {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-top: 20px;
+    }
 
-legend {
-    padding: 0 5px;
-    color: #333;
-}
+    legend {
+        padding: 0 5px;
+        color: #333;
+    }
 
-label {
-    display: block;
-    margin-top: 10px;
-}
+    label {
+        display: block;
+        margin-top: 10px;
+    }
 
-input[type="radio"] {
-    margin-right: 10px;
-}
-
+    input[type="radio"] {
+        margin-right: 10px;
+    }
 </style>
 
 <body>
@@ -139,78 +138,50 @@ input[type="radio"] {
         <label for="address">Address:</label>
         <textarea id="address" name="address" rows="4" cols="50"></textarea>
 
-        <button id="sub">Submit Order</button>
+        <button type="submit">Submit Order</button>
+        <button >pay now</button>
     </form>
 
 
     <script>
-        let sub = document.querySelector('#sub');
-
-        sub.addEventListener('click', () => {
-            // Display a confirmation dialog and store the result in a variable
-            var confirmation = confirm("Confirm order?");
-
-            // Check if the user confirmed the action
-            if (confirmation === true) {
-                // If confirmed, submit the form
-                submitForm();
-                // localStorage.removeItem('cartItems'); // Clear cart after placing order
-            } else {
-                event.preventDefault();
-                alert("Order cancelled...")
+        document.getElementById('food-order-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            if (!confirm('Are you sure you want to submit this order?')) {
+                alert('Order submission cancelled.');
+                return; // Exit the function if the user cancels
             }
+            submitOrderForm();
         });
 
-        function submitForm() {
-            // Find the form element by its ID
-            let form = document.getElementById("food-order-form");
+        function submitOrderForm() {
+            const form = document.getElementById('food-order-form');
+            form.setAttribute('action', '/submit'); // Set the action to the desired URL
+            form.setAttribute('method', 'post'); // Set the method to POST
 
-            // Set the action attribute of the form
-            form.setAttribute("action", "/submit"); // Set the action to the desired URL
-            form.setAttribute("method", "post"); // Set the method to POST
-
-            // Retrieve userId from local storage
-            const userId = localStorage.getItem('userId');
-
-            // Retrieve cart items from local storage for the specific user
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-
-            // Dynamically create input fields with item details
-            cartItems.forEach((item, index) => {
-                // Create input fields
-
-                const inputNameField = document.createElement('input');
-                inputNameField.type = 'text'; // Change type to 'text'
-                inputNameField.name = "food";
-                inputNameField.value = item.name;
-                form.appendChild(inputNameField);
-
-                const inputPriceField = document.createElement('input');
-                inputPriceField.type = 'text'; // Change type to 'text'
-                inputPriceField.name = "price";
-                inputPriceField.value = item.price;
-                form.appendChild(inputPriceField);
-
-                const inputServesField = document.createElement('input');
-                inputServesField.type = 'text'; // Change type to 'text'
-                inputServesField.name = "serves";
-                inputServesField.value = item.serves;
-                form.appendChild(inputServesField);
+            // Append additional data from localStorage if needed
+            const spareItems = JSON.parse(localStorage.getItem('spareItems') || '[]');
+            spareItems.forEach((item) => {
+                appendHiddenInput(form, 'itemName', item.name);
+                appendHiddenInput(form, 'price', item.price);
             });
 
-            // Create a hidden input field to store the userId
-            var userIdInput = document.createElement('input');
-            userIdInput.type = 'hidden';
-            userIdInput.name = 'userId';
-            userIdInput.value = userId;
+            const userId = localStorage.getItem('userId');
+            if (userId) {
+                appendHiddenInput(form, 'userId', userId);
+            }
 
-            // Append the userId input field to the form
-            form.appendChild(userIdInput);
-
-            // Submit the form
-            form.submit();
+            form.submit(); // Submit the form
+            localStorage.clear(); // Clear localStorage after submission
         }
+
+        function appendHiddenInput(form, name, value) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = value;
+            form.appendChild(input);
+        }
+
 
 
     </script>
