@@ -29,7 +29,7 @@ const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Database connection
-mongoose.connect("mongodb+srv://shreyask253:arwK7keJwYJUZNBq@spare-db.q71dn1b.mongodb.net/?retryWrites=true&w=majority&appName=spare-db")
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log("MONGODB connected Successfully...");
     })
@@ -272,13 +272,14 @@ const razorpay = new Razorpay({
 // Route to create an order
 app.post('/create-order', async (req, res) => {
     const options = {
-        amount: req.body.amount * 100,  // amount in the smallest currency unit
+        amount: req.body.price * 100,  // amount in the smallest currency unit
         currency: "INR",
         receipt: "order_rcptid_11"
     };
 
     try {
         const order = await razorpay.orders.create(options);
+        console.log(order)
         res.json(order);
     } catch (error) {
         res.status(500).send(error);

@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Order Page</title>
     <link rel="stylesheet" type="text/css" href="styles/style2.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <style>
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #dddcdc;
+        background-color: #f4f4f4;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -111,40 +114,35 @@
 </style>
 
 <body>
+    <div class="form-container">
+        <h1>Place Your Order</h1>
+        <form id="food-order-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
 
-    <form id="food-order-form">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
 
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required>
+            <fieldset>
+                <legend>Payment Method:</legend>
+                <label><input type="radio" name="payment" value="credit_debit" required> Credit/Debit Card</label>
+                <label><input type="radio" name="payment" value="upi"> UPI</label>
+                <label><input type="radio" name="payment" value="cod"> Cash on Delivery</label>
+            </fieldset>
 
-        <fieldset>
-            <legend>Payment Method:</legend>
-            <label>
-                <input type="radio" name="payment" value="credit_debit" required> Credit/Debit Card
-            </label>
-            <label>
-                <input type="radio" name="payment" value="upi"> UPI
-            </label>
-            <label>
-                <input type="radio" name="payment" value="cod"> Cash on Delivery
-            </label>
-        </fieldset>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="4" required></textarea>
 
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" rows="4" cols="50"></textarea>
-
-        <button type="submit">Submit Order</button>
-        <button >pay now</button>
-    </form>
-
+            <button type="submit" id="submitOrderBtn">Submit Order</button>
+            <button type="button" id="payBtn">Pay with Razorpay</button>
+        </form>
+    </div>
 
     <script>
-        document.getElementById('food-order-form').addEventListener('submit', function(event) {
+        document.getElementById('food-order-form').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
             if (!confirm('Are you sure you want to submit this order?')) {
                 alert('Order submission cancelled.');
@@ -182,8 +180,58 @@
             form.appendChild(input);
         }
 
+        document.getElementById('payBtn').addEventListener('click', async () => {
+            const orderResponse = await fetch('/create-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ amount: 100 }) // Adjust the amount as necessary
+            });
 
+            const orderData = await orderResponse.json();
 
+            var options = {
+                "key": "rzp_test_rZ9XdkGjHcXsd6", // Replace this with your actual Razorpay key ID
+                "amount": orderData.amount,
+                "currency": "INR",
+                "name": "Acme Corp",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": orderData.id,
+                "handler": function (response) {
+                    alert("Payment successful. Payment ID: " + response.razorpay_payment_id);
+                    // Optionally verify the payment
+                    verifyPayment(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature);
+                },
+                "prefill": {
+                    "name": "Haruki Murakami",
+                    "email": "example@example.com",
+                    "contact": "9999999999"
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+            var paymentObject = new Razorpay(options);
+            paymentObject.open();
+        });
+
+        function verifyPayment(orderId, paymentId, signature) {
+            fetch('/verify-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    razorpay_order_id: orderId,
+                    razorpay_payment_id: paymentId,
+                    razorpay_signature: signature
+                })
+            }).then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Payment verification failed', error));
+        }
     </script>
 </body>
 
