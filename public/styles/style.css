@@ -19,8 +19,8 @@ header {
   z-index: 999;
   background:#2196F3;
   color: white;
-  margin-bottom: 2em;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  /* margin-bottom: 2em; */
+  box-shadow: rgba(4, 4, 4, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
 }
 a {
@@ -41,7 +41,7 @@ header ul li:hover {
 .slider {
   width: 100vw;
   height: 40vh;
-  background: rgb(243, 255, 254);
+  background: rgb(5, 5, 5);
 }
 .owl-carousel .owl-item img {
   width: auto;
