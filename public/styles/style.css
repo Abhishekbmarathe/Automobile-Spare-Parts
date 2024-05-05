@@ -17,7 +17,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 999;
-  background: rgb(60 62 87);
+  background:#2196F3;
   color: white;
   margin-bottom: 2em;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -62,7 +62,7 @@ header ul li:hover {
 /* footer */
 footer {
   flex-direction: column;
-  background-color: rgb(33, 33, 69);
+  background-color:#2196F3;
   color: white;
 }
 .footer2 {

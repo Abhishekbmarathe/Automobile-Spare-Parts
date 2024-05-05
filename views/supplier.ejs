@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supplier Interface</title>
+    <title>Admin Interface</title>
     <style>
         /* Basic styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: grey;
-            color: white;
+            background: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
         header {
-            background-color: #333;
-            color: #fff;
+            background-color: #1707f9;
+            color: #f2f2f5;
+           
             padding: 10px 0;
             text-align: center;
         }
@@ -40,7 +42,8 @@
         }
 
         a {
-            color: white;
+            color: rgb(247, 244, 244);
+            font-family: Georgia, 'Times New Roman', Times, serif;
 
         }
 
@@ -82,15 +85,16 @@
 
         button {
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: hwb(0 3% 0%);
             color: white;
-            border: none;
+            border:#000000;
             cursor: pointer;
             border-radius: 5px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #2809f1;
         }
     </style>
 </head>
@@ -98,13 +102,13 @@
 <body>
 
     <header>
-        <h1>Supplier Interface</h1>
+        <h1>Admin Interface</h1>
     </header>
 
     <nav>
         <ul>
 
-            <form action="/codetails" method="post">
+            <form action="/codetails" method="get">
                 <button type="submit">orders</button>
             </form>
             <li><a href="#">Profile</a></li>
