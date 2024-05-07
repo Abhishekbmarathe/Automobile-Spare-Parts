@@ -11,7 +11,7 @@
 <style>
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #f4f4f4;
+        background-color: #c0bdbd;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -22,7 +22,7 @@
         background-color: white;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         width: 100%;
         max-width: 500px;
     }
@@ -128,9 +128,8 @@
 
             <fieldset>
                 <legend>Payment Method:</legend>
-                <label><input type="radio" name="payment" value="credit_debit" required> Credit/Debit Card</label>
-                <label><input type="radio" name="payment" value="upi"> UPI</label>
-                <label><input type="radio" name="payment" value="cod"> Cash on Delivery</label>
+                <label><input type="radio" name="payment" value="credit_debit" required>make online payment</label>
+                <label><input type="radio" name="payment" checked value="cash"> Cash on delivery</label>
             </fieldset>
 
             <label for="address">Address:</label>
@@ -142,6 +141,26 @@
     </div>
 
     <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const paymentMethods = document.getElementsByName('payment');
+            const submitBtn = document.getElementById('submitOrderBtn');
+            const payBtn = document.getElementById('payBtn');
+
+            function togglePaymentButton() {
+                const isCreditDebit = document.querySelector('input[name="payment"]:checked').value === "credit_debit";
+                submitBtn.style.display = isCreditDebit ? 'none' : 'inline';
+                payBtn.style.display = isCreditDebit ? 'inline' : 'none';
+            }
+
+            paymentMethods.forEach(function (payment) {
+                payment.addEventListener('change', togglePaymentButton);
+            });
+
+            togglePaymentButton();  // Initial check on page load
+        });
+
+
         document.getElementById('food-order-form').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
             if (!confirm('Are you sure you want to submit this order?')) {
@@ -157,16 +176,16 @@
             form.setAttribute('method', 'post'); // Set the method to POST
 
             // Append additional data from localStorage if needed
-            const spareItems = JSON.parse(localStorage.getItem('spareItems') || '[]');
+            const spareItems = JSON.parse(sessionStorage.getItem('spareItems') || '[]');
             spareItems.forEach((item) => {
                 appendHiddenInput(form, 'itemName', item.name);
                 appendHiddenInput(form, 'price', item.price);
             });
 
-            const userId = localStorage.getItem('userId');
-            if (userId) {
-                appendHiddenInput(form, 'userId', userId);
-            }
+            // const userId = localStorage.getItem('userId');
+            // if (userId) {
+            //     appendHiddenInput(form, 'userId', userId);
+            // }
 
             form.submit(); // Submit the form
             localStorage.clear(); // Clear localStorage after submission
@@ -181,21 +200,31 @@
         }
 
         document.getElementById('payBtn').addEventListener('click', async () => {
+
+            const orderItems = JSON.parse(sessionStorage.getItem('spareItems'));
+            let totalAmount = parseFloat(orderItems[orderItems.length - 1].price);
+            const name = orderItems[orderItems.length - 1].name;
+            const email = document.querySelector('input[name="email"]').value;
+            const cname = document.querySelector('#name').value;
+            const contact = document.querySelector('#phone').value;
+
+
+
             const orderResponse = await fetch('/create-order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ amount: 100 }) // Adjust the amount as necessary
+                body: JSON.stringify({ amount: totalAmount }) // Adjust the amount as necessary
             });
 
             const orderData = await orderResponse.json();
 
             var options = {
                 "key": "rzp_test_rZ9XdkGjHcXsd6", // Replace this with your actual Razorpay key ID
-                "amount": 120000,
+                "amount": totalAmount * 100,
                 "currency": "INR",
-                "name": "Acme Corp",
+                "name": name,
                 "description": "Test Transaction",
                 "image": "https://example.com/your_logo",
                 "order_id": orderData.id,
@@ -205,9 +234,9 @@
                     verifyPayment(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature);
                 },
                 "prefill": {
-                    "name": "Ashwinni",
-                    "email": "example@example.com",
-                    "contact": "6360329431"
+                    "name": cname,
+                    "email": email,
+                    "contact": contact
                 },
                 "theme": {
                     "color": "#F37254"

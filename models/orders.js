@@ -19,11 +19,10 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // paymentMethod: {
-    //     type: String,
-    //     required: true,
-    //     enum: ['credit_debit', 'upi', 'cod']
-    // },
+    payment: {
+        type: String,
+        required: true,
+    },
     address: {
         type: String,
 

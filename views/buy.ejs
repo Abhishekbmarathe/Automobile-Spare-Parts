@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="styles/utils.css">
+    <link rel="stylesheet" href="/styles/utils.css">
     <!-- <link rel="stylesheet" href="styles/parts.css"> -->
 
     <title>buyyyyyy</title>
@@ -104,7 +104,9 @@
                         <%= item.description %>
                     </p>
                     <form action="/buynow" method="get">
-                        <button class="btn" onclick="addToCart()">Add to Cart</button>
+                        <button type="button" class="btn" item-name="<%= item.productName %>"
+                            item-price="<%= item.price %>" onclick="addToCart(this)">Add to Cart</button>
+
                         <button type="submit" class="btn buy-now" item-name="<%= item.productName %>"
                             item-price="<%= item.price %>" onclick="buynow(this)">Buy Now</button>
                     </form>
@@ -174,18 +176,6 @@
 
         <script>
 
-
-
-            // let myOrders = document.querySelector('#myOrders');
-            // let myOrd = document.querySelector('.myOrders');
-
-            // myOrders.addEventListener("click",(()=>{
-            //     myOrd.classList.toggle("order-visible");
-            // }))
-
-
-            // my order from submission
-
             // Function to submit the form
             function submitForm() {
                 const form = document.getElementById("myOrders");
@@ -208,16 +198,10 @@
                 form.submit();
             }
 
-            // Add event listener to the form submission
-            document.getElementById("my_orders").addEventListener("click", function (event) {
-                event.preventDefault(); // Prevent the default form submission
-                submitForm(); // Call the submitForm function
-            });
-
 
             // storing my cards details in local storage
 
-            function buynow(button) {
+            function addToCart(button) {
                 console.log(button);
 
 
@@ -244,6 +228,35 @@
                 spareItems.push(newItem);
                 localStorage.setItem('spareItems', JSON.stringify(spareItems));
             }
+
+
+            function buynow(button) {
+                console.log(button);
+
+                const name = button.getAttribute("item-name");
+                const price = button.getAttribute("item-price");
+
+                let spareItems = sessionStorage.getItem('spareItems');  // Changed to sessionStorage
+
+                // If cartItems is null, initialize it as an empty array
+                if (!spareItems) {
+                    spareItems = [];
+                } else {
+                    // Parse the JSON string to convert it back to an array
+                    spareItems = JSON.parse(spareItems);
+                }
+
+                // Create a new item object
+                const newItem = {
+                    name: name,
+                    price: price
+                };
+
+                // Add the new item to the cartItems array
+                spareItems.push(newItem);
+                sessionStorage.setItem('spareItems', JSON.stringify(spareItems));  // Changed to sessionStorage
+            }
+
         </script>
 </body>
 
