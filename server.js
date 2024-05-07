@@ -268,7 +268,7 @@ const razorpay = new Razorpay({
     key_id: process.env.KEY_ID, // Replace with your key id from Razorpay dashboard
     key_secret: process.env.KEY_SECRET // Replace with your key secret
 });
- 
+
 // Route to create an order
 app.post('/create-order', async (req, res) => {
     const options = {
@@ -291,7 +291,7 @@ app.post('/verify-payment', (req, res) => {
     const secret = process.env.KEY_SECRET; // Your secret
 
     // Add your logic to verify payment signature
-    const crypto = require('crypto');
+    // const crypto = require('crypto');
     const shasum = crypto.createHmac('sha256', secret);
     shasum.update(`${req.body.razorpay_order_id}|${req.body.razorpay_payment_id}`);
     const digest = shasum.digest('hex');

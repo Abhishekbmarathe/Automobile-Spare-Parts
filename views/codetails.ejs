@@ -28,6 +28,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            
         }
         th, td {
             border: 1px solid #fff; /* White borders for cells */
@@ -66,6 +67,7 @@
                     <th>Address</th>
                     <th>Item Name</th>
                     <th>Price</th>
+                    <th>payment-type</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -78,6 +80,7 @@
                         <td><%= detail.address %></td>
                         <td><%= detail.itemName ? detail.itemName : 'N/A' %></td>
                         <td><%= detail.price ? detail.price : 'N/A' %></td>
+                        <td><%= detail.payment %></td>
                         <td><button class="fulfill-btn" onclick="markFulfilled('<%= detail._id %>')">Fulfilled</button></td>
                     </tr>
                 <% }); %>

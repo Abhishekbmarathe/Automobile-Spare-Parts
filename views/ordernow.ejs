@@ -128,7 +128,7 @@
 
             <fieldset>
                 <legend>Payment Method:</legend>
-                <label><input type="radio" name="payment" value="credit_debit" required>make online payment</label>
+                <label><input type="radio" name="payment" value="online pay" required>make online payment</label>
                 <label><input type="radio" name="payment" checked value="cash"> Cash on delivery</label>
             </fieldset>
 
@@ -188,7 +188,8 @@
             // }
 
             form.submit(); // Submit the form
-            localStorage.clear(); // Clear localStorage after submission
+            sessionStorage.clear(); // Clear localStorage after submission
+
         }
 
         function appendHiddenInput(form, name, value) {
@@ -231,6 +232,7 @@
                 "handler": function (response) {
                     alert("Payment successful. Payment ID: " + response.razorpay_payment_id);
                     // Optionally verify the payment
+                    submitOrderForm();
                     verifyPayment(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature);
                 },
                 "prefill": {
