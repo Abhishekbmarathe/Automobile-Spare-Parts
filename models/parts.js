@@ -16,18 +16,18 @@ const productSchema = new mongoose.Schema({
         required: true,
         min: 0 // Ensure that the price cannot be negative
     },
-    category: {
+    stock: {
         type: String,
         required: true,
        
     },
     itemimg:{
         type:String
+    },
+    model:{
+        type:String
     }
-    // stock: {
-    //     type: Boolean,
-    //     default: false // Stock is false by default, indicating not available
-    // }
+
 });
 
 // Export the Product model

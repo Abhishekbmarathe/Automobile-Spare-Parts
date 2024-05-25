@@ -119,24 +119,20 @@
         <h2>Add New Product</h2>
 
         <form id="addProductForm" action="/add" method="post" enctype="multipart/form-data" class="cat_form">
+            <label for="productName">Model:</label><br>
+            <input type="text" id="productName" name="model" required><br>
             <label for="productName">Product Name:</label><br>
             <input type="text" id="productName" name="productName" required><br>
             <label for="description">Description:</label><br>
             <textarea id="description" name="description" rows="4" required></textarea><br>
             <label for="price">Price:</label><br>
-
-
             <input type="number" id="price" name="price" step="0.01" min="0" required><br><br>
 
             <label for="">Enter Item image</label> <br>
             <input type="file" name="itemimg" accept="image/*"> <br><br>
-            <label for="category">Category:</label><br>
-            <select id="category" name="category" required>
-                <option value="spareparts">spare parts</option>
-
-            </select><br>
-            <label for="stock">Stock Availability:</label><br>
-            <input type="checkbox" id="stock" name="stock"><br>
+            
+            <label for="stock">Number of Stocks:</label><br>
+            <input type="text" id="stock" name="stock"><br>
             <button type="submit">Add Product</button>
         </form>
 
@@ -145,11 +141,9 @@
             <thead>
                 <tr>
                     <th>Product Name</th>
-                    <th>Description</th>
                     <th>Price</th>
-                    <th>Category</th>
-                    <th>Stock Availability</th>
-                    <th>Image</th>
+                    <th>stock</th>
+                  
                     <th>Action</th>
                 </tr>
             </thead>
@@ -164,20 +158,14 @@
                                 <td>
                                     <%= product.productName %>
                                 </td>
-                                <td>
-                                    <%= product.description %>
-                                </td>
+                        
                                 <td>$<%= product.price.toFixed(2) %>
                                 </td>
                                 <td>
-                                    <%= product.category %>
+                                    <%= product.stock %>
                                 </td>
-                                <td>
-                                    <%= product.stock ? "Yes" : "No" %>
-                                </td>
-                                <td>
-                                    <%= product.itemimg %>
-                                </td>
+                               
+                              
                                 <td>
 
                                     <form id="deleteForm" action="/delete" method="POST">

@@ -11,6 +11,85 @@
 
     <title>parts</title>
 </head>
+<style>
+    .boxes {
+        /* border: 2px solid red; */
+        width: 74%;
+        height: 700px;
+    }
+
+    .boxes:nth-child(1) {
+        width: 300px;
+    }
+    .item-card {
+        box-shadow: 0 10px 13px rgb(0 0 0 / 33%);
+        width: 255px;
+        border-radius: 8px;
+        text-align: center;
+        background: white;
+        overflow: hidden;
+        padding: 0 0 10px 0;
+        margin: 1em auto;
+    }
+
+    .item-image {
+        width: 100%;
+        height: 165px;
+        display: block;
+        object-fit: cover;
+    }
+
+    .item-name {
+        font-size: 20px;
+        color: #333;
+        margin-top: 10px;
+        /* Adds a little space above the product name */
+    }
+
+    .item-price {
+        color: #888;
+        font-size: 18px;
+    }
+
+    .item-description {
+        font-size: 14px;
+        color: #666;
+        margin: 10px 0;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 80%;
+        /* Wider buttons for better mobile interaction */
+        margin-left: 10%;
+        /* Center buttons */
+        margin-right: 10%;
+        /* Center buttons */
+    }
+
+    .btn.buy-now {
+        background-color: #28a745;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+
+    .container1 {
+        width: 95%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: auto;
+
+    }
+</style>
 
 <body>
 
@@ -23,37 +102,52 @@
 
 
         <section>
-            <h1 class="center" style="margin: 2em 0;">BRANDS</h1>
-            <div class="container">
-                <div class="cards flex around">
-                    <div class="imgs">
-                        <form action="/buy" method="get">
-                            <button type="submit">
-                        <img src="https://eauto.co.in/cdn/shop/collections/4_cad9e4e7-7f45-407f-a84a-60a6338bac07_280x.jpg?v=1616925351" alt="">
-                    </button>
+            <h1 class="center" style="margin: 2em 0;">PARTS</h1>
+            <div class="container flex  gap-4">
+                <div class="boxes">
+                    <form id="motorcycleForm" action="/your-server-endpoint" method="post">
+
+                        <select id="motorcycle" name="motorcycle" onchange="submitForm()">
+                            <option value="">Select a model</option>
+                            <option value="dominar400">Dominar 400</option>
+                            <option value="dominar250">Dominar 250</option>
+                            <option value="pulsarns200">Pulsar ns200</option>
+                            <option value="pulsarns160">Pulsar ns160</option>
+                            <option value="pulsarns125">Pulsar ns125</option>
+                            <option value="pulsar150">Pulsar 150</option>
+                            <option value="pulsar220f">Pulsar 220f</option>
+                            <option value="pulsarn250">Pulsar n250</option>
+                            <option value="pulsarn160">Pulsar n160</option>
+                        </select>
                     </form>
-                    </div>
-                    <div class="imgs">
-                        <form action="/buy" method="get">
-                            <button type="submit">
-                        <img src="https://eauto.co.in/cdn/shop/collections/dominar-400_280x.jpg?v=1616925194" alt="">
-                    </button>
-                    </form>
-                    </div>
-                    <div class="imgs">
-                        <form action="/buy" method="get">
-                            <button type="submit">
-                        <img src="https://eauto.co.in/cdn/shop/collections/2_280x.jpg?v=1616925128" alt="">
-                    </button>
-                    </form>     
-                    </div>
-                    <div class="imgs">
-                        <form action="/buy" method="get">
-                            <button type="submit">
-                        <img src="https://eauto.co.in/cdn/shop/collections/3_6558d714-ecce-4666-9884-7203c51c079b_280x.jpg?v=1616925099" alt="">
-                        </button>
-                        </form>
-                        </div>
+                </div>
+                <div class="boxes">
+                    <div class="container1">
+                        <% data.forEach(item=> { %>
+
+                            <div class="item-card">
+                                <img src="<%= item.itemimg %>" alt="SuperWidget 3000" class="item-image">
+                                <h2 class="item-name">
+                                    
+                                    <%= item.productName %>
+                                </h2>
+                                <p class="item-price">
+                                    <%= item.price %>Rs
+                                </p>
+
+                                <p class="item-description">
+                                    <%= item.model %>
+                                </p>
+                                <form action="/buynow" method="get">
+                                    <button type="button" class="btn" item-name="<%= item.productName %>"
+                                        item-price="<%= item.price %>" onclick="addToCart(this)">Add to Cart</button>
+
+                                    <button type="submit" class="btn buy-now" item-name="<%= item.productName %>"
+                                        item-price="<%= item.price %>" onclick="buynow(this)">Buy Now</button>
+                                </form>
+                            </div>
+                            <% }) %>
+
                     </div>
                 </div>
             </div>
@@ -116,7 +210,96 @@
         </footer>
         <script src="/js/parts.js"></script>
 
-        
+        <script>
+            function submitForm() {
+                document.getElementById('motorcycleForm').submit();
+            }
+
+
+
+
+             // Function to submit the form
+             function submitForm() {
+                const form = document.getElementById("myOrders");
+                const userId = localStorage.getItem("userId");
+
+                // Set the action and method of the form
+                form.setAttribute("action", "/myorders");
+                form.setAttribute("method", "get");
+
+                // Create a hidden input field to pass the userId
+                const userIdInput = document.createElement("input");
+                userIdInput.type = "hidden";
+                userIdInput.name = "userId";
+                userIdInput.value = userId;
+
+                // Append the hidden input field to the form
+                form.appendChild(userIdInput);
+
+                // Submit the form
+                form.submit();
+            }
+
+
+            // storing my cards details in local storage
+
+            function addToCart(button) {
+                console.log(button);
+
+
+                const name = button.getAttribute("item-name");
+                const price = button.getAttribute("item-price");
+
+                let spareItems = localStorage.getItem('spareItems');
+
+                // If cartItems is null, initialize it as an empty array
+                if (!spareItems) {
+                    spareItems = [];
+                } else {
+                    // Parse the JSON string to convert it back to an array
+                    spareItems = JSON.parse(spareItems);
+                }
+
+                // Create a new item object
+                const newItem = {
+                    name: name,
+                    price: price
+                };
+
+                // Add the new item to the cartItems array
+                spareItems.push(newItem);
+                localStorage.setItem('spareItems', JSON.stringify(spareItems));
+            }
+
+
+            function buynow(button) {
+                console.log(button);
+
+                const name = button.getAttribute("item-name");
+                const price = button.getAttribute("item-price");
+
+                let spareItems = sessionStorage.getItem('spareItems');  // Changed to sessionStorage
+
+                // If cartItems is null, initialize it as an empty array
+                if (!spareItems) {
+                    spareItems = [];
+                } else {
+                    // Parse the JSON string to convert it back to an array
+                    spareItems = JSON.parse(spareItems);
+                }
+
+                // Create a new item object
+                const newItem = {
+                    name: name,
+                    price: price
+                };
+
+                // Add the new item to the cartItems array
+                spareItems.push(newItem);
+                sessionStorage.setItem('spareItems', JSON.stringify(spareItems));  // Changed to sessionStorage
+            }
+        </script>
+
 </body>
 
 </html>

@@ -9,7 +9,7 @@ import OTPGenerator from 'otp-generator'; // Library for generating OTPs
 import session from 'express-session';
 import crypto from 'crypto';
 import { config } from 'dotenv';
-await config();  
+await config();
 import multer from 'multer';
 import orders from './models/orders.js'
 import Razorpay from 'razorpay';
@@ -109,8 +109,9 @@ app.get("/about", (req, res) => {
 })
 
 // Route for rendering the parts page
-app.get("/parts", (req, res) => {
-    res.render("parts");
+app.get("/parts",async (req, res) => {
+    const data = await parts.find();
+    res.render("parts",{data});
 })
 
 // Route for rendering the buy page

@@ -26,3 +26,9 @@
 .column {
     flex-direction: column;
 }
+.gap-8{
+    gap: 8em;
+}
+.gap-4{
+    gap:4em;
+}
