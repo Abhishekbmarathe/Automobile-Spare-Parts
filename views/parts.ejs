@@ -21,6 +21,7 @@
     .boxes:nth-child(1) {
         width: 300px;
     }
+
     .item-card {
         box-shadow: 0 10px 13px rgb(0 0 0 / 33%);
         width: 255px;
@@ -97,57 +98,49 @@
     <!-- header -->
     <%- include('nav'); -%>
 
-
-
-
-
         <section>
             <h1 class="center" style="margin: 2em 0;">PARTS</h1>
             <div class="container flex  gap-4">
                 <div class="boxes">
-                    <form id="motorcycleForm" action="/your-server-endpoint" method="post">
 
-                        <select id="motorcycle" name="motorcycle" onchange="submitForm()">
-                            <option value="">Select a model</option>
-                            <option value="dominar400">Dominar 400</option>
-                            <option value="dominar250">Dominar 250</option>
-                            <option value="pulsarns200">Pulsar ns200</option>
-                            <option value="pulsarns160">Pulsar ns160</option>
-                            <option value="pulsarns125">Pulsar ns125</option>
-                            <option value="pulsar150">Pulsar 150</option>
-                            <option value="pulsar220f">Pulsar 220f</option>
-                            <option value="pulsarn250">Pulsar n250</option>
-                            <option value="pulsarn160">Pulsar n160</option>
-                        </select>
-                    </form>
+
+                    <select id="motorcycle" name="motorcycle" onchange="filterItems()">
+                        <option value="">Select a model</option>
+                        <option value="dominar400">Dominar 400</option>
+                        <option value="dominar250">Dominar 250</option>
+                        <option value="pulsarns200">Pulsar ns200</option>
+                        <option value="pulsarns160">Pulsar ns160</option>
+                        <option value="pulsarns125">Pulsar ns125</option>
+                        <option value="pulsar150">Pulsar 150</option>
+                        <option value="pulsar220f">Pulsar 220f</option>
+                        <option value="pulsarn250">Pulsar n250</option>
+                        <option value="pulsarn160">Pulsar n160</option>
+                    </select>
+
+
                 </div>
                 <div class="boxes">
                     <div class="container1">
                         <% data.forEach(item=> { %>
-
                             <div class="item-card">
                                 <img src="<%= item.itemimg %>" alt="SuperWidget 3000" class="item-image">
                                 <h2 class="item-name">
-                                    
                                     <%= item.productName %>
                                 </h2>
                                 <p class="item-price">
-                                    <%= item.price %>Rs
+                                    <%= item.price %> Rs
                                 </p>
-
                                 <p class="item-description">
                                     <%= item.model %>
                                 </p>
                                 <form action="/buynow" method="get">
                                     <button type="button" class="btn" item-name="<%= item.productName %>"
                                         item-price="<%= item.price %>" onclick="addToCart(this)">Add to Cart</button>
-
                                     <button type="submit" class="btn buy-now" item-name="<%= item.productName %>"
                                         item-price="<%= item.price %>" onclick="buynow(this)">Buy Now</button>
                                 </form>
                             </div>
                             <% }) %>
-
                     </div>
                 </div>
             </div>
@@ -211,15 +204,15 @@
         <script src="/js/parts.js"></script>
 
         <script>
-            function submitForm() {
+            function submitform() {
                 document.getElementById('motorcycleForm').submit();
             }
 
 
 
 
-             // Function to submit the form
-             function submitForm() {
+            // Function to submit the form
+            function submitForm() {
                 const form = document.getElementById("myOrders");
                 const userId = localStorage.getItem("userId");
 
@@ -298,6 +291,25 @@
                 spareItems.push(newItem);
                 sessionStorage.setItem('spareItems', JSON.stringify(spareItems));  // Changed to sessionStorage
             }
+
+            // filter items
+            function filterItems() {
+                const selectedModel = document.getElementById('motorcycle').value.toLowerCase();
+                const itemCards = document.getElementsByClassName('item-card');
+                // console.log(selectedModel)
+                Array.from(itemCards).forEach(card => {
+                    const model = card.querySelector('.item-description').innerText.toLowerCase().replace(/\s+/g, '');
+                    console.log(selectedModel,model)
+                    if (selectedModel === "" || model === selectedModel) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            }
+            document.addEventListener('DOMContentLoaded', (event) => {
+                filterItems();
+            });
         </script>
 
 </body>
