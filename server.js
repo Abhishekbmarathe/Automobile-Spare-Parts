@@ -9,7 +9,7 @@ import OTPGenerator from 'otp-generator'; // Library for generating OTPs
 import session from 'express-session';
 import crypto from 'crypto';
 import { config } from 'dotenv';
-await config();
+await config();  
 import multer from 'multer';
 import orders from './models/orders.js'
 import Razorpay from 'razorpay';
