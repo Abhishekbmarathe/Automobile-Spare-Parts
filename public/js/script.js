@@ -30,10 +30,10 @@ jQuery(document).ready(function ($) {
 
 // navigatingto nextpage when clicked on images
 
-const img = document.querySelectorAll('.items img');
-img.forEach(element => {
-    element.addEventListener("click", () => {
-        const form = document.querySelector("form");
-        form.submit();
-    })
-});
+// const img = document.querySelectorAll('.items img');
+// img.forEach(element => {
+//     element.addEventListener("click", () => {
+//         const form = document.querySelector("form");
+//         form.submit();
+//     })
+// });

@@ -110,6 +110,7 @@ app.get("/about", (req, res) => {
 
 // Route for rendering the parts page
 app.get("/parts",async (req, res) => {
+    console.log(req.query.image_id)
     const data = await parts.find();
     res.render("parts",{data});
 })
