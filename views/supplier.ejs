@@ -4,22 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Interface</title>
+    <title>Supplier Interface</title>
     <style>
         /* Basic styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: rgb(0, 0, 0);
-            color: rgb(255, 255, 255);
-            font-family: Georgia, 'Times New Roman', Times, serif;
+            background: grey;
+            color: white;
         }
 
         header {
-            background-color: #1707f9;
-            color: #f2f2f5;
-           
+            background-color: #333;
+            color: #fff;
             padding: 10px 0;
             text-align: center;
         }
@@ -42,8 +40,7 @@
         }
 
         a {
-            color: rgb(247, 244, 244);
-            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: white;
 
         }
 
@@ -85,17 +82,19 @@
 
         button {
             padding: 10px 20px;
-            background-color: hwb(0 3% 0%);
+            background-color: #4CAF50;
             color: white;
-            border:#000000;
+            border: none;
             cursor: pointer;
             border-radius: 5px;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
 
         button:hover {
-            background-color: #2809f1;
+            background-color: #45a049;
         }
+
+
+        
     </style>
 </head>
 
@@ -107,7 +106,7 @@
 
     <nav>
         <ul>
-
+           
             <form action="/codetails" method="get">
                 <button type="submit">orders</button>
             </form>
@@ -126,13 +125,15 @@
             <label for="description">Description:</label><br>
             <textarea id="description" name="description" rows="4" required></textarea><br>
             <label for="price">Price:</label><br>
-            <input type="number" id="price" name="price" step="0.01" min="0" required><br><br>
+            <input type="number" id="price" name="price" step="0.01" min="0" required><br>
+            <label for="category">Category:</label><br>
+            <select id="category" name="category" required>
+                <option value="">accessories</option>
+                <option value="spareparts">spare parts</option>
 
-            <label for="">Enter Item image</label> <br>
-            <input type="file" name="itemimg" accept="image/*"> <br><br>
-            
-            <label for="stock">Number of Stocks:</label><br>
-            <input type="text" id="stock" name="stock"><br>
+            </select><br>
+            <label for="stock">Stock Availability:</label><br>
+            <input type="checkbox" id="stock" name="stock"><br>
             <button type="submit">Add Product</button>
         </form>
 
@@ -141,58 +142,56 @@
             <thead>
                 <tr>
                     <th>Product Name</th>
+                    <th>Description</th>
                     <th>Price</th>
-                    <th>stock</th>
-                  
+                    <th>Category</th>
+                    <th>Stock Availability</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <% if (!data || data.length === 0) { %>
-                    <h1>No items...</h1>
+                <% data.forEach(function(product) { %>
+                    <tr>
+                        <td>
+                            <%= product.productName %>
+                        </td>
+                        <td>
+                            <%= product.description %>
+                        </td>
+                        <td>$<%= product.price.toFixed(2) %>
+                        </td>
+                        <td>
+                            <%= product.category %>
+                        </td>
+                        <td>
+                            <%= product.stock ? "Yes" : "No" %>
+                        </td>
+                        <td>
 
-                    <% } else { %>
+                            <form id="deleteForm" action="/delete" method="POST">
+                                <input type="hidden" name="productId" value="<%= product._id %>" />
+                                <button class="btn" type="submit">Delete</button>
+                            </form>
 
-                        <% data.forEach(function(product) { %>
-                            <tr>
-                                <td>
-                                    <%= product.productName %>
-                                </td>
-                        
-                                <td>$<%= product.price.toFixed(2) %>
-                                </td>
-                                <td>
-                                    <%= product.stock %>
-                                </td>
-                               
-                              
-                                <td>
-
-                                    <form id="deleteForm" action="/delete" method="POST">
-                                        <input type="hidden" name="productId" value="<%= product._id %>" />
-                                        <button class="btn" type="submit">Delete</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            <% }); %>
+                        </td>
+                    </tr>
+                    <% }); %>
             </tbody>
-            <% } %>
 
         </table>
     </div>
 
     <script>
         let btn = document.querySelector(".btn");
-        btn.addEventListener("click", () => {
-
-            // Optionally, you can perform checks or confirmations here
-            if (confirm("Are you sure you want to delete this product?")) {
-                const form = document.getElementById('deleteForm');
-                form.submit();  // This submits the form
-                // location.reload();
-            }
-
+        btn.addEventListener("click",  ()=> {
+            
+                // Optionally, you can perform checks or confirmations here
+                if (confirm("Are you sure you want to delete this product?")) {
+                    const form = document.getElementById('deleteForm');
+                    form.submit();  // This submits the form
+                    // location.reload();
+                }
+        
         });
     </script>
 
