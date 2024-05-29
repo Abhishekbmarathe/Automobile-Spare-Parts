@@ -9,53 +9,106 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000; /* Black background for the body */
+            background: radial-gradient(#a23982, #1f1013);
+            animation: fadeIn 1s ease-out;
+            color: #fff;
         }
         .container {
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #000; /* Black background for the container */
+            background-color: rgba(43, 43, 43, 0.8); /* Semi-transparent background */
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.1); /* Subtle white shadow */
-            color: #fff; /* White text color for general readability */
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
         h1 {
-            color: #d10000; /* Red color for headers */
+            color: #4393a1;
             text-align: center;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            
         }
         th, td {
-            border: 1px solid #fff; /* White borders for cells */
+            border: 1px solid #444;
             padding: 8px;
             text-align: left;
         }
         th {
-            background-color: #d10000; /* Red header background */
-            color: #ffffff; /* White text for contrast */
+            background-color: #444;
+            color: #ffffff;
         }
         td {
-            color: #fff; /* White text for content */
+            color: #ffffff;
         }
         .fulfill-btn {
             padding: 5px 10px;
-            background-color: #d10000; /* Red background for buttons */
+            background-color: #d10000;
             border: none;
             border-radius: 5px;
-            color: #fff; /* White text */
+            color: #fff;
             cursor: pointer;
         }
         .fulfill-btn:hover {
-            background-color: #a30000; /* Darker red on hover */
+            background-color: #a30000;
+        }
+        .light {
+            position: absolute;
+            width: 0px;
+            opacity: .75;
+            background-color: white;
+            box-shadow: #e9f1f1 0px 0px 20px 2px;
+            opacity: 0;
+            top: 100vh;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            margin: auto;
+        }
+        .x1 { animation: floatUp 4s infinite linear; transform: scale(1.0); }
+        .x2 { animation: floatUp 7s infinite linear; transform: scale(1.6); left: 15%; }
+        .x3 { animation: floatUp 2.5s infinite linear; transform: scale(.5); left: -15%; }
+        .x4 { animation: floatUp 4.5s infinite linear; transform: scale(1.2); left: -34%; }
+        .x5 { animation: floatUp 8s infinite linear; transform: scale(2.2); left: -57%; }
+        .x6 { animation: floatUp 3s infinite linear; transform: scale(.8); left: -81%; }
+        .x7 { animation: floatUp 5.3s infinite linear; transform: scale(3.2); left: 37%; }
+        .x8 { animation: floatUp 4.7s infinite linear; transform: scale(1.7); left: 62%; }
+        .x9 { animation: floatUp 4.1s infinite linear; transform: scale(0.9); left: 85%; }
+
+        @keyframes floatUp {
+            0% { top: 100vh; opacity: 0; }
+            25% { opacity: 1; }
+            50% { top: 0vh; opacity: .8; }
+            75% { opacity: 1; }
+            100% { top: -100vh; opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        #footer {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2em;
+            color: white;
+            position: fixed;
+            transform: translate(95vw, 90vh);
         }
     </style>
 </head>
 <body>
+
+    <div class='light x1'></div>
+    <div class='light x2'></div>
+    <div class='light x3'></div>
+    <div class='light x4'></div>
+    <div class='light x5'></div>
+    <div class='light x6'></div>
+    <div class='light x7'></div>
+    <div class='light x8'></div>
+    <div class='light x9'></div>
     <div class="container">
         <h1>Order Details</h1>
         <table>
@@ -67,7 +120,7 @@
                     <th>Address</th>
                     <th>Item Name</th>
                     <th>Price</th>
-                    <th>payment-type</th>
+                    <th>Payment Type</th>
                     <th>Action</th>
                 </tr>
             </thead>
