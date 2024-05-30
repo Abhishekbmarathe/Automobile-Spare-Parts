@@ -4,20 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supplier Interface</title>
+    <title>Admin Interface</title>
     <style>
         /* Basic styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: grey;
-            color: white;
+            background: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
         header {
-            background-color: #333;
-            color: #fff;
+            background-color: #1707f9;
+            color: #f2f2f5;
             padding: 10px 0;
             text-align: center;
         }
@@ -40,14 +41,16 @@
         }
 
         a {
-            color: white;
-
+            color: rgb(247, 244, 244);
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
+            background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent background */
+            border-radius: 10px;
         }
 
         h2 {
@@ -59,8 +62,14 @@
         }
 
         form input,
-        form select {
+        form select,
+        form textarea {
             margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
         table {
@@ -82,19 +91,169 @@
 
         button {
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: hwb(0 3% 0%);
             color: white;
             border: none;
             cursor: pointer;
             border-radius: 5px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #2809f1;
         }
 
+        /* backgorund animation */
 
-        
+/* @import url('https://fonts.googleapis.com/css?family=Exo:400,700'); */
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: 'Exo', sans-serif;
+}
+
+
+.context {
+    width: 100%;
+    position: absolute;
+    top:50vh;
+    
+}
+
+.context h1{
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+
+
+.area{
+    background: rgb(20, 180, 255);  
+    background: -webkit-linear-gradient(to left, #8f94fb, rgb(20, 180, 255));  
+    width: 100%;
+    height:100vh;
+    
+   
+}
+
+.circles{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.circles li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    
+}
+
+.circles li:nth-child(1){
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+
+.circles li:nth-child(2){
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.circles li:nth-child(3){
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.circles li:nth-child(4){
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.circles li:nth-child(5){
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(6){
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+}
+
+.circles li:nth-child(7){
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.circles li:nth-child(8){
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.circles li:nth-child(9){
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+}
+
+.circles li:nth-child(10){
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+
+
+@keyframes animate {
+
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+
+}
     </style>
 </head>
 
@@ -106,34 +265,44 @@
 
     <nav>
         <ul>
-           
             <form action="/codetails" method="get">
-                <button type="submit">orders</button>
+                <button type="submit">Orders</button>
             </form>
-            <li><a href="#">Profile</a></li>
+            <!-- <li><a href="#">Profile</a></li> -->
             <li><a href="#">Logout</a></li>
         </ul>
     </nav>
+
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
     <div class="container">
         <h2>Add New Product</h2>
-
-        <form id="addProductForm" action="/add" method="post" enctype="multipart/form-data" class="cat_form">
-            <label for="productName">Model:</label><br>
-            <input type="text" id="productName" name="model" required><br>
+        <form id="addProductForm" action="/add" method="post" enctype="multipart/form-data">
+            <label for="model">Model:</label><br>
+            <input type="text" id="model" name="model" required><br>
             <label for="productName">Product Name:</label><br>
             <input type="text" id="productName" name="productName" required><br>
             <label for="description">Description:</label><br>
             <textarea id="description" name="description" rows="4" required></textarea><br>
             <label for="price">Price:</label><br>
-            <input type="number" id="price" name="price" step="0.01" min="0" required><br>
-            <label for="category">Category:</label><br>
-            <select id="category" name="category" required>
-                <option value="">accessories</option>
-                <option value="spareparts">spare parts</option>
-
-            </select><br>
-            <label for="stock">Stock Availability:</label><br>
-            <input type="checkbox" id="stock" name="stock"><br>
+            <input type="number" id="price" name="price" step="0.01" min="0" required><br><br>
+            <label for="itemimg">Enter Item Image:</label><br>
+            <input type="file" id="itemimg" name="itemimg" accept="image/*"><br><br>
+            <label for="stock">Number of Stocks:</label><br>
+            <input type="text" id="stock" name="stock"><br>
             <button type="submit">Add Product</button>
         </form>
 
@@ -142,59 +311,44 @@
             <thead>
                 <tr>
                     <th>Product Name</th>
-                    <th>Description</th>
                     <th>Price</th>
-                    <th>Category</th>
-                    <th>Stock Availability</th>
+                    <th>Stock</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <% data.forEach(function(product) { %>
+                <% if (!data || data.length === 0) { %>
                     <tr>
-                        <td>
-                            <%= product.productName %>
-                        </td>
-                        <td>
-                            <%= product.description %>
-                        </td>
-                        <td>$<%= product.price.toFixed(2) %>
-                        </td>
-                        <td>
-                            <%= product.category %>
-                        </td>
-                        <td>
-                            <%= product.stock ? "Yes" : "No" %>
-                        </td>
-                        <td>
-
-                            <form id="deleteForm" action="/delete" method="POST">
-                                <input type="hidden" name="productId" value="<%= product._id %>" />
-                                <button class="btn" type="submit">Delete</button>
-                            </form>
-
-                        </td>
+                        <td colspan="4" style="text-align: center;">No items...</td>
                     </tr>
+                <% } else { %>
+                    <% data.forEach(function(product) { %>
+                        <tr>
+                            <td><%= product.productName %></td>
+                            <td>$<%= product.price.toFixed(2) %></td>
+                            <td><%= product.stock %></td>
+                            <td>
+                                <form id="deleteForm" action="/delete" method="POST">
+                                    <input type="hidden" name="productId" value="<%= product._id %>" />
+                                    <button class="btn" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
                     <% }); %>
+                <% } %>
             </tbody>
-
         </table>
     </div>
 
     <script>
-        let btn = document.querySelector(".btn");
-        btn.addEventListener("click",  ()=> {
-            
-                // Optionally, you can perform checks or confirmations here
-                if (confirm("Are you sure you want to delete this product?")) {
-                    const form = document.getElementById('deleteForm');
-                    form.submit();  // This submits the form
-                    // location.reload();
+        document.querySelectorAll(".btn").forEach(btn => {
+            btn.addEventListener("click", (event) => {
+                if (!confirm("Are you sure you want to delete this product?")) {
+                    event.preventDefault();
                 }
-        
+            });
         });
     </script>
-
 
 </body>
 
