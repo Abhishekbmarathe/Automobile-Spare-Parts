@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles/utils.css">
+    <link rel="stylesheet" href="styles/parts.css">
+
+
+    <title>parts</title>
+</head>
+<style>
+    .boxes {
+        /* border: 2px solid red; */
+        width: 74%;
+        height: 700px;
+    }
+
+    .boxes:nth-child(1) {
+        width: 300px;
+    }
+
+    .item-card {
+        box-shadow: 0 10px 13px rgb(0 0 0 / 33%);
+        width: 255px;
+        border-radius: 8px;
+        text-align: center;
+        background: white;
+        overflow: hidden;
+        padding: 0 0 10px 0;
+        margin: 1em auto;
+    }
+
+    .item-image {
+        width: 100%;
+        height: 165px;
+        display: block;
+        object-fit: cover;
+    }
+
+    .item-name {
+        font-size: 20px;
+        color: #333;
+        margin-top: 10px;
+        /* Adds a little space above the product name */
+    }
+
+    .item-price {
+        color: #888;
+        font-size: 18px;
+    }
+
+    .item-description {
+        font-size: 14px;
+        color: #666;
+        margin: 10px 0;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 80%;
+        /* Wider buttons for better mobile interaction */
+        margin-left: 10%;
+        /* Center buttons */
+        margin-right: 10%;
+        /* Center buttons */
+    }
+
+    .btn.buy-now {
+        background-color: #28a745;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+
+    .container1 {
+        width: 95%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: auto;
+
+    }
+
+
+    /* Style the select dropdown */
+    #motorcycle {
+        width: 220px;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #4CAF50;
+        /* Primary color */
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        /* Text color */
+        appearance: none;
+        /* Removes default dropdown arrow */
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2069.4c-3.6-3.6-9.5-3.6-13.1%200L146.2%20197.1%2018.5%2069.4C14.9%2065.9%209%2065.9%205.4%2069.4%202%2073%202%2079%205.4%2082.6l134.7%20134.7c1.8%201.8%204.1%202.7%206.5%202.7%202.4%200%204.7-0.9%206.5-2.7L287%2082.6c3.6-3.6%203.6-9.5%200-13.2z%22/%3E%3C/svg%3E');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 10px;
+    }
+
+    /* Style the select dropdown */
+    #motorcycle {
+        width: 220px;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #1E90FF;
+        /* Blue color */
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        /* Text color */
+        appearance: none;
+        /* Removes default dropdown arrow */
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2069.4c-3.6-3.6-9.5-3.6-13.1%200L146.2%20197.1%2018.5%2069.4C14.9%2065.9%209%2065.9%205.4%2069.4%202%2073%202%2079%205.4%2082.6l134.7%20134.7c1.8%201.8%204.1%202.7%206.5%202.7%202.4%200%204.7-0.9%206.5-2.7L287%2082.6c3.6-3.6%203.6-9.5%200-13.2z%22/%3E%3C/svg%3E');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 10px;
+    }
+
+    /* Remove default arrow in IE */
+    #motorcycle::-ms-expand {
+        display: none;
+    }
+
+    /* Style the options */
+    #motorcycle option {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #fff;
+        color: #333;
+        /* Text color */
+    }
+
+    /* Hover effect for options */
+    #motorcycle option:hover {
+        background-color: #E0F7FF;
+        /* Light blue background on hover */
+        color: #333;
+        /* Ensure text color stays readable */
+    }
+
+    /* Background color for selected option */
+    #motorcycle option:checked {
+        background-color: #1E90FF;
+        /* Blue color for selected item */
+        color: #fff;
+        /* White text color for selected item */
+    }
+
+    /* Focus effect for the select */
+    #motorcycle:focus {
+        border-color: #1E90FF;
+        /* Blue border on focus */
+        box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+        /* Shadow color matching blue */
+        outline: none;
+    }
+</style>
+
+<body>
+
+
+    <!-- header -->
+    <%- include('nav'); -%>
+
+        <section>
+            <h1 class="center" style="margin: 2em 0;">PARTS</h1>
+            <div class="container flex  gap-4">
+                <div class="boxes">
+
+
+                    <select id="motorcycle" name="motorcycle" onchange="filterItems()">
+                        <option value="">Select a model</option>
+                        <option value="access125">Access 125</option>
+                        <option value="gixer150/250">Gixer 150/250</option>
+                        
+                        
+                    </select>
+
+
+                </div>
+                <div class="boxes">
+                    <div class="container1">
+                        <% data.forEach(item=> { %>
+                            <div class="item-card">
+                                <img src="<%= item.itemimg %>" alt="SuperWidget 3000" class="item-image">
+                                <h2 class="item-name">
+                                    <%= item.productName %>
+                                </h2>
+                                <p class="item-price">
+                                    <%= item.price %> Rs
+                                </p>
+                                <p class="item-description">
+                                    <%= item.model %>
+                                </p>
+                                <form action="/buynow" method="get">
+                                    <button type="button" class="btn" item-name="<%= item.productName %>"
+                                        item-price="<%= item.price %>" item-model="<%= item.model %>"
+                                        item-img="<%= item.itemimg %>" onclick="addToCart(this)">Add to Cart</button>
+                                    <button type="submit" class="btn buy-now" item-name="<%= item.productName %>"
+                                        item-price="<%= item.price %>" onclick="buynow(this)">Buy Now</button>
+                                </form>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <footer class="flex">
+            <div class="footer0">
+                <h1>NUTS & BOLTZZ</h1>
+            </div>
+            <div class="footer1">
+                Connect with us at
+                <div class="social-media">
+                    <a href="#">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                    <a href="#">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                    <a href="#">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                    <a href="#">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                    <a href="#">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </div>
+            </div>
+            <div class="footer2">
+                <div class="product">
+                    <div class="heading">Products</div>
+                </div>
+                <div class="services">
+                    <div class="heading">Services</div>
+                    <div class="div">Return</div>
+                    <div class="div">Cash Back</div>
+                    <div class="div">Others</div>
+                </div>
+                <div class="Company">
+                    <div class="heading">Company</div>
+                    <div class="div">Complaint</div>
+                    <div class="div">Support</div>
+                </div>
+                <div class="Get Help">
+                    <div class="heading">Get Help</div>
+                    <div class="div">Help Center</div>
+                    <div class="div">Privacy Policy</div>
+                    <div class="div">Terms</div>
+                    <div class="div">Login</div>
+                </div>
+            </div>
+            <div class="footer3">
+                Copyright ©
+                <h4>NUTS & BOLTS</h4>
+                2021-2028
+            </div>
+        </footer>
+        <script src="/js/parts.js"></script>
+
+        <script>
+            function submitform() {
+                document.getElementById('motorcycleForm').submit();
+            }
+
+
+
+
+            // Function to submit the form
+            function submitForm() {
+                const form = document.getElementById("myOrders");
+                const userId = localStorage.getItem("userId");
+
+                // Set the action and method of the form
+                form.setAttribute("action", "/myorders");
+                form.setAttribute("method", "get");
+
+                // Create a hidden input field to pass the userId
+                const userIdInput = document.createElement("input");
+                userIdInput.type = "hidden";
+                userIdInput.name = "userId";
+                userIdInput.value = userId;
+
+                // Append the hidden input field to the form
+                form.appendChild(userIdInput);
+
+                // Submit the form
+                form.submit();
+            }
+
+
+            // storing my cards details in local storage
+
+            function addToCart(button) {
+                console.log(button);
+
+
+                const name = button.getAttribute("item-name");
+                const price = button.getAttribute("item-price");
+                const model = button.getAttribute("item-model");
+                const itemImg = button.getAttribute("item-img");
+
+                let spareItems = localStorage.getItem('spareItems');
+
+                // If cartItems is null, initialize it as an empty array
+                if (!spareItems) {
+                    spareItems = [];
+                } else {
+                    // Parse the JSON string to convert it back to an array
+                    spareItems = JSON.parse(spareItems);
+                }
+
+                // Create a new item object
+                const newItem = {
+                    name: name,
+                    price: price,
+                    model: model,
+                    itemImg: itemImg
+                };
+
+                // Add the new item to the cartItems array
+                spareItems.push(newItem);
+                localStorage.setItem('spareItems', JSON.stringify(spareItems));
+            }
+
+
+            function buynow(button) {
+                console.log(button);
+
+                const name = button.getAttribute("item-name");
+                const price = button.getAttribute("item-price");
+
+                let spareItems = sessionStorage.getItem('spareItems');  // Changed to sessionStorage
+
+                // If cartItems is null, initialize it as an empty array
+                if (!spareItems) {
+                    spareItems = [];
+                } else {
+                    // Parse the JSON string to convert it back to an array
+                    spareItems = JSON.parse(spareItems);
+                }
+
+                // Create a new item object
+                const newItem = {
+                    name: name,
+                    price: price
+                };
+
+                // Add the new item to the cartItems array
+                spareItems.push(newItem);
+                sessionStorage.setItem('spareItems', JSON.stringify(spareItems));  // Changed to sessionStorage
+            }
+
+            // filter items
+            function filterItems() {
+                const selectedModel = document.getElementById('motorcycle').value.toLowerCase();
+                const itemCards = document.getElementsByClassName('item-card');
+                // console.log(selectedModel)
+                Array.from(itemCards).forEach(card => {
+                    const model = card.querySelector('.item-description').innerText.toLowerCase().replace(/\s+/g, '');
+                    console.log(selectedModel, model)
+                    if (selectedModel === "" || model === selectedModel) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            }
+            document.addEventListener('DOMContentLoaded', (event) => {
+                filterItems();
+            });
+        </script>
+
+</body>
+
+</html>
