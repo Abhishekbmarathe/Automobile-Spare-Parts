@@ -110,18 +110,41 @@ app.get("/about", (req, res) => {
 
 // Route for rendering the parts page
 app.get("/parts", async (req, res) => {
-    console.log(req.query.image_id)
+    try {
+        const { image_id } = req.query;
 
-    const {iid} = req.query;
+        // Ensure data is an array
+        const data = await parts.find(req.query) || [];
 
-    switch(iid){
-        case "1": res.render()  
+        switch (image_id) {
+            case "re":
+                res.render("royalenfield", { data });
+                break;
+            case "ktm":
+                res.render("ktm", { data });
+                break;
+            case "yamaha":
+                res.render("yamaha", { data });
+                break;
+            case "suzuki":
+                res.render("suzuki", { data });
+                break;
+            case "honda":
+                res.render("honda", { data });
+                break;
+            case "bajaj":
+                res.render("parts", { data });
+                break;
+            default:
+                res.send("invalid bike");
+                break;
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
-    
-    
-    const data = await parts.find();
-    res.render("parts", { data });
-})
+});
+
 
 // Route for rendering the buy page
 app.get("/buy", async (req, res) => {
