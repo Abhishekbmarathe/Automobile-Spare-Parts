@@ -5,18 +5,23 @@
 <!-- <div class="spar">
     <h1>AUTOMOBILE SPARE PARTS</h1>
 </div> -->
+
+<style>
+    .navForm button{
+        background:none;
+        border: none;
+    }
+</style>
 <header>
     <div class="logo"><a href="#"><h2>NUTS & BOLTZZ</h2></a></div>
     <div class="menu flex">
-        <a href=""><ion-icon name="close" class="close"></ion-icon></a>
-        <ul class="flex gap-2">
-            <li><a href="#" class="under">HOME</a></li>
-            <li><a href="index.ejs" class="under">SHOP</a></li>
-            <li><a href="#" class="under">OUR PRODUCTS</a></li>
-            <li><a href="#" class="under">CONTACT US</a></li>
-            <li><a href="about.ejs" class="under">ABOUT US</a></li>
-            <li><a href="about.ejs" class="under">My Cart</a></li>
-        </ul>
+        <form action="/navigate" class="navForm flex gap-2" method="get" >
+            <button type="submit" name="action" value="home" class="under">HOME</button>
+            <button type="submit" name="action" value="contact_us" class="under">CONTACT US</button>
+            <button type="submit" name="action" value="about_us" class="under">ABOUT US</button>
+            <button type="submit" name="action" value="my_cart" class="under">My Cart</button>
+        </form>
+        
     </div>
 
 

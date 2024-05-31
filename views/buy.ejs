@@ -207,6 +207,7 @@
 
                 const name = button.getAttribute("item-name");
                 const price = button.getAttribute("item-price");
+                const model = button.getAttribute("item-model");
 
                 let spareItems = localStorage.getItem('spareItems');
 
@@ -221,7 +222,8 @@
                 // Create a new item object
                 const newItem = {
                     name: name,
-                    price: price
+                    price: price,
+                    model: model
                 };
 
                 // Add the new item to the cartItems array

@@ -21,7 +21,7 @@ const port = 3001 // Setting the port number
 // Body parsing middleware for handling form submissions
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use("/resources",express.static("resources"));
-app.use(bodyParser.json());     
+app.use(bodyParser.json());
 
 // Setting EJS template engine and static file directory
 app.set('view engine', 'ejs')
@@ -137,6 +137,28 @@ app.get("/useradress", (req, res) => {
 })
 
 
+// route for navigation
+app.get('/navigate', (req, res) => {
+    const { action } = req.query;
+
+    switch (action) {
+        case 'home':
+            // Redirect to HOME page
+            res.redirect('/');
+            break;
+        case 'contact_us':
+            // Redirect to CONTACT US page
+            res.redirect('/contact-us');
+            break;
+        case 'my_cart':
+            // Redirect to My Cart page
+            res.render("mycart.ejs");
+            break;
+        default:
+            // Handle unknown action
+            res.status(404).send('Invalid action');
+    }
+});
 
 
 // Route for rendering the cardspay page
