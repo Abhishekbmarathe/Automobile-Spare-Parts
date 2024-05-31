@@ -21,7 +21,7 @@ const port = 3001 // Setting the port number
 // Body parsing middleware for handling form submissions
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use("/resources",express.static("resources"));
-app.use(bodyParser.json());
+app.use(bodyParser.json());     
 
 // Setting EJS template engine and static file directory
 app.set('view engine', 'ejs')
@@ -109,10 +109,10 @@ app.get("/about", (req, res) => {
 })
 
 // Route for rendering the parts page
-app.get("/parts",async (req, res) => {
+app.get("/parts", async (req, res) => {
     console.log(req.query.image_id)
     const data = await parts.find();
-    res.render("parts",{data});
+    res.render("parts", { data });
 })
 
 // Route for rendering the buy page
@@ -186,6 +186,7 @@ app.post("/usersignin", async (req, res) => {
     console.log(req.body); // Logging the user data
     res.render("home"); // Rendering the home page after signup
 })
+app
 
 app.post("/submit", async (req, res) => {
     console.log(req.body);
