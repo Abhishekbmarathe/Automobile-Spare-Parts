@@ -345,6 +345,11 @@
                 // Add the new item to the cartItems array
                 spareItems.push(newItem);
                 localStorage.setItem('spareItems', JSON.stringify(spareItems));
+
+                setTimeout(() => {
+                    alert("item added to cart")
+
+                }, 100);
             }
 
 
