@@ -111,6 +111,14 @@ app.get("/about", (req, res) => {
 // Route for rendering the parts page
 app.get("/parts", async (req, res) => {
     console.log(req.query.image_id)
+
+    const {iid} = req.query;
+
+    switch(iid){
+        case "1": res.render()  
+    }
+    
+    
     const data = await parts.find();
     res.render("parts", { data });
 })

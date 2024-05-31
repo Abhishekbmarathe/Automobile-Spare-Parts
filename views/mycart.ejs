@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,53 +69,74 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <%- include('nav'); -%>
 
-    <section>
-        <h1 class="center" style="margin: 2em 0;">My Cart</h1>
-        <div class="container1" id="cartItemsContainer">
-            <!-- Items will be dynamically added here -->
-        </div>
-    </section>
+        <section>
+            <h1 class="center" style="margin: 2em 0;">My Cart</h1>
+            <div class="container1" id="cartItemsContainer">
+                <!-- Items will be dynamically added here -->
+            </div>
+        </section>
 
-    <footer class="flex">
-        <!-- Footer content here -->
-    </footer>
+        <footer class="flex">
+            <!-- Footer content here -->
+        </footer>
 
-    <script>
-        // Function to display cart items from local storage
-        function displayCartItems() {
-            const cartItemsContainer = document.getElementById('cartItemsContainer');
-            const spareItems = JSON.parse(localStorage.getItem('spareItems')) || [];
+        <script>
+            // Function to display cart items from local storage
+            function displayCartItems() {
+                const cartItemsContainer = document.getElementById('cartItemsContainer');
+                const spareItems = JSON.parse(localStorage.getItem('spareItems')) || [];
 
-            spareItems.forEach(item => {
-                const itemCard = document.createElement('div');
-                itemCard.className = 'item-card';
+                spareItems.forEach(item => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
 
-                itemCard.innerHTML = `
+                    itemCard.innerHTML = `
                     <img src="${item.itemImg}" alt="${item.name}" class="item-image">
                     <h2 class="item-name">${item.name}</h2>
                     <p class="item-price">${item.price} Rs</p>
                     <p class="item-description">${item.model}</p>
                     <button class="btn" onclick="removeFromCart('${item.name}')">Remove</button>
+                    <button type="button" class="btn buy-now" item-name="${item.name}" item-price="${item.price}" item-model="${item.model}" item-img="${item.itemImg}" onclick="buynow(this)">Buy Now</button>
                 `;
 
-                cartItemsContainer.appendChild(itemCard);
-            });
-        }
+                    cartItemsContainer.appendChild(itemCard);
+                });
+            }
+            // Function to remove item from cart
+            function removeFromCart(itemName) {
+                let spareItems = JSON.parse(localStorage.getItem('spareItems')) || [];
+                spareItems = spareItems.filter(item => item.name !== itemName);
+                localStorage.setItem('spareItems', JSON.stringify(spareItems));
+                location.reload(); // Reload the page to update the cart
+            }
 
-        // Function to remove item from cart
-        function removeFromCart(itemName) {
-            let spareItems = JSON.parse(localStorage.getItem('spareItems')) || [];
-            spareItems = spareItems.filter(item => item.name !== itemName);
-            localStorage.setItem('spareItems', JSON.stringify(spareItems));
-            location.reload(); // Reload the page to update the cart
-        }
+            // Load cart items when the page is loaded
+            document.addEventListener('DOMContentLoaded', displayCartItems);
 
-        // Load cart items when the page is loaded
-        document.addEventListener('DOMContentLoaded', displayCartItems);
-    </script>
+
+            function buynow(button) {
+                const name = button.getAttribute("item-name");
+                const price = button.getAttribute("item-price");
+                const model = button.getAttribute("item-model");
+                const itemImg = button.getAttribute("item-img");
+
+                // Create a form dynamically
+                const form = document.createElement('form');
+                form.method = 'get';
+                form.action = '/buynow';
+
+    
+
+                // Append the form to the body and submit it
+                document.body.appendChild(form);
+                form.submit();
+            }
+        </script>
 </body>
+
 </html>
