@@ -64,6 +64,8 @@
 
         form {
             margin-bottom: 20px;
+            color: white;
+
         }
 
         form input,
@@ -76,6 +78,7 @@
             border-radius: 4px;
             box-sizing: border-box;
             background: none;
+            color: white;
         }
 
         table {
@@ -290,6 +293,9 @@
         <div class="container">
             <h2>Add New Product</h2>
             <form id="addProductForm" action="/add" method="post" enctype="multipart/form-data">
+
+                <label for="">Company:</label><br>
+                <input type="text" id="" name="company" required><br>
                 <label for="model">Model:</label><br>
                 <input type="text" id="model" name="model" required><br>
                 <label for="productName">Product Name:</label><br>
