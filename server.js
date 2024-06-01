@@ -114,7 +114,8 @@ app.get("/parts", async (req, res) => {
         const { image_id } = req.query;
 
         // Ensure data is an array
-        const data = await parts.find(req.query) || [];
+        // const data = await parts.find(req.query) || [];
+        const data = await parts.find() || [];
 
         switch (image_id) {
             case "re":
