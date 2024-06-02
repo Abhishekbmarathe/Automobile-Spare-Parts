@@ -8,11 +8,6 @@ const loginSchema = new Schema({
         required: true,
         
     },
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
     password: {
         type: String,
         required: true

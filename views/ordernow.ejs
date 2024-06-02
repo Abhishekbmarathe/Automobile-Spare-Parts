@@ -350,6 +350,7 @@
             spareItems.forEach((item) => {
                 appendHiddenInput(form, 'itemName', item.name);
                 appendHiddenInput(form, 'price', item.price);
+                appendHiddenInput(form, 'userId', localStorage.getItem('userId'));
             });
 
             form.submit(); // Submit the form

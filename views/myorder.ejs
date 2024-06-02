@@ -1,199 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders</title>
     <style>
-        /* Basic styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: rgb(240, 240, 240);
-            color: rgb(33, 33, 33);
+        body{
+            background-color: grey;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
+        .orders-container {
+            width: 80%;
+            margin: auto;
             padding: 20px;
-            background-color: #fff;
+            /* background-color: #f9f9f9; */
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .product {
-            display: flex;
-            align-items: center;
+        .order-card {
+            padding: 20px;
             margin-bottom: 20px;
+            /* background-color: #fff; */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
         }
 
-        .product img {
-            max-width: 100px;
-            margin-right: 20px;
+        .order-card h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #333;
         }
 
-        .product-details {
-            flex: 1;
+        .order-card p {
+            margin: 10px 0;
+            color: #666;
         }
 
-        .product-name {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .product-description {
-            margin-top: 10px;
-        }
-
-        .product-price {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #555;
+        .order-card strong {
+            color: #333;
         }
 
         .return-button {
+            display: block;
             margin-top: 20px;
-            padding: 8px 16px;
-            background-color: #007bff;
+            padding: 10px 20px;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
         .return-button:hover {
-            background-color: #0056b3;
-        }
-
-        .return-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            z-index: 1000;
-        }
-
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        .popup-header {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .popup-content {
-            margin-bottom: 20px;
-        }
-
-        .popup-actions {
-            text-align: right;
-        }
-
-        .popup-actions button {
-            margin-left: 10px;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .popup-actions .close-popup {
-            background-color: #ccc;
-        }
-
-        .popup-actions .submit-popup {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .popup-actions .submit-popup:hover {
-            background-color: #0056b3;
+            background-color: #45a049;
         }
     </style>
 </head>
-
 <body>
-
-    <div class="container">
-        <div class="product">
-            <img src="product-image.jpg" alt="Product Image">
-            <div class="product-details">
-                <div class="product-name">Product Name</div>
-                <div class="product-description">Product description goes here...</div>
-                <div class="product-price">$99.99</div>
+    <div class="orders-container">
+        <h1>My Orders</h1>
+        <% orderss.forEach(order => { %>
+            <div class="order-card">
+                <h2>Order: <%= order.name %></h2>
+                <p><strong>Price:</strong> <%= order.price %></p>
+                <p><strong>Item Name:</strong> <%= order.itemName %></p>
+                <p><strong>Email:</strong> <%= order.email %></p>
+                <p><strong>Phone:</strong> <%= order.phone %></p>
+                <p><strong>Payment:</strong> <%= order.payment %></p>
+                <p><strong>Address:</strong> <%= order.address %></p>
+                <p><strong>Order Date:</strong> <%= order.createdAt.toDateString() %></p>
+                <!-- Assuming you have an endpoint like /return-product to handle return requests -->
+                <form action="/return-product" method="post">
+                    <!-- Include any necessary hidden fields, like order ID, for processing -->
+                    <input type="hidden" name="orderId" value="<%= order.id %>">
+                    <button type="submit" class="return-button">Return Product</button>
+                </form>
             </div>
-        </div>
-        <button class="return-button" onclick="showReturnPopup()">Return Product</button>
+        <% }); %>
     </div>
-
-    <div class="popup-overlay" id="popupOverlay"></div>
-
-    <div class="return-popup" id="returnPopup">
-        <div class="popup-header">Return Product</div>
-        <div class="popup-content">
-            <label for="returnReason">Reason for return:</label>
-            <select id="returnReason">
-                <option value="damaged">Damaged Product</option>
-                <option value="wrong">Wrong Product</option>
-            </select>
-        </div>
-        <div class="popup-actions">
-            <button class="close-popup" onclick="closeReturnPopup()">Cancel</button>
-            <button class="submit-popup" onclick="submitReturn()">Submit</button>
-        </div>
-    </div>
-
-    <script>
-        function showReturnPopup() {
-            document.getElementById('popupOverlay').style.display = 'block';
-            document.getElementById('returnPopup').style.display = 'block';
-        }
-
-        function closeReturnPopup() {
-            document.getElementById('popupOverlay').style.display = 'none';
-            document.getElementById('returnPopup').style.display = 'none';
-        }
-
-        function submitReturn() {
-            // Custom notification for return confirmation
-            const notification = document.createElement('div');
-            notification.innerText = 'Your money will be refunded in a few days.';
-            notification.style.position = 'fixed';
-            notification.style.bottom = '20px';
-            notification.style.left = '50%';
-            notification.style.transform = 'translateX(-50%)';
-            notification.style.backgroundColor = '#007bff';
-            notification.style.color = 'white';
-            notification.style.padding = '10px 20px';
-            notification.style.borderRadius = '4px';
-            notification.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
-            document.body.appendChild(notification);
-
-            // Hide the notification after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-
-            // Close the popup
-            closeReturnPopup();
-        }
-    </script>
-
 </body>
-
 </html>

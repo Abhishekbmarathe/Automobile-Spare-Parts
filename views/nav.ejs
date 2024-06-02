@@ -7,23 +7,27 @@
 </div> -->
 
 <style>
-    .navForm button{
-        background:none;
+    .navForm button {
+        background: none;
         border: none;
     }
 </style>
 <header>
-    <div class="logo"><a href="#"><h2>NUTS & BOLTZZ</h2></a></div>
+    <div class="logo"><a href="#">
+            <h2>NUTS & BOLTZZ</h2>
+        </a></div>
     <div class="menu flex">
-        <form action="/navigate" class="navForm flex gap-2" method="get" >
+        <form action="/navigate" class="navForm flex gap-2" method="get">
             <button type="submit" name="action" value="home" class="under">HOME</button>
             <button type="submit" name="action" value="contact_us" class="under">CONTACT US</button>
             <button type="submit" name="action" value="about_us" class="under">ABOUT US</button>
             <button type="submit" name="action" value="my_cart" class="under">My Cart</button>
-            <button type="submit" name="action" value="my_orders" class="under">My orders</button>
         </form>
         
     </div>
+    <form id="myOrders">
+        <button type="submit" class="under" id="my_orders">My orders</button>
+    </form>
 
 
 
@@ -32,8 +36,7 @@
 </header>
 
 <style>
-
-    .spar{
+    .spar {
         width: 100%;
         text-align: center;
         background-color: #026eb1;
@@ -44,12 +47,13 @@
         justify-content: center;
         padding: 15px;
     }
-    .spar h1{
+
+    .spar h1 {
         margin: 0;
-        
+
     }
-    
-    
+
+
     .search-box {
         width: fit-content;
         height: fit-content;
@@ -128,24 +132,24 @@
         /* rough equivalent to lighten($grey, 35%) */
     }
 
- 
+
     .button {
         transform: scale(.8);
-    outline: none;
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 16px;
-    color: hsla(350, 0%, 100%, 1);
-    text-shadow: -1px -1px 1px hsla(350, 0%, 0%, 0.7), 1px 1px 1px hsla(350, 0%, 100%, 0.3);
-    /* display: block; */
-    margin: 0;
-    padding: 10px 27px;
-    cursor: pointer;
-    background-color: hsla(350, 80%, 10%, 1);
-    background-image: linear-gradient(273deg, hsla(350, 80%, 60%, 1) 30%, hsla(350, 80%, 50%, 1) 40%);
-    border: none;
-    border-radius: 16px;
-    box-shadow: inset 0px 0px 1px 1px hsla(350, 80%, 30%, 0.9), inset 0px 0px 2px 3px hsla(350, 80%, 50%, 0.9), inset 1px 1px 1px 4px hsla(350, 80%, 100%, 0.8), inset 0px 0px 2px 7px hsla(350, 80%, 60%, 0.8), inset 0px 0px 4px 10px hsla(350, 80%, 50%, 0.9), 8px 10px 2px 6px hsla(350, 80%, 20%, 0.55), 0px 0px 3px 2px hsla(350, 80%, 40%, 0.9), 0px 0px 2px 6px hsla(350, 80%, 50%, 0.9), -1px -1px 1px 6px hsla(350, 80%, 100%, 0.9), 0px 0px 2px 11px hsla(350, 80%, 50%, 0.9), 0px 0px 1px 12px hsla(350, 80%, 40%, 0.9), 1px 3px 14px 14px hsla(350, 80%, 0%, 0.4);
-}
+        outline: none;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 16px;
+        color: hsla(350, 0%, 100%, 1);
+        text-shadow: -1px -1px 1px hsla(350, 0%, 0%, 0.7), 1px 1px 1px hsla(350, 0%, 100%, 0.3);
+        /* display: block; */
+        margin: 0;
+        padding: 10px 27px;
+        cursor: pointer;
+        background-color: hsla(350, 80%, 10%, 1);
+        background-image: linear-gradient(273deg, hsla(350, 80%, 60%, 1) 30%, hsla(350, 80%, 50%, 1) 40%);
+        border: none;
+        border-radius: 16px;
+        /* box-shadow: inset 0px 0px 1px 1px hsla(350, 80%, 30%, 0.9), inset 0px 0px 2px 3px hsla(350, 80%, 50%, 0.9), inset 1px 1px 1px 4px hsla(350, 80%, 100%, 0.8), inset 0px 0px 2px 7px hsla(350, 80%, 60%, 0.8), inset 0px 0px 4px 10px hsla(350, 80%, 50%, 0.9), 8px 10px 2px 6px hsla(350, 80%, 20%, 0.55), 0px 0px 3px 2px hsla(350, 80%, 40%, 0.9), 0px 0px 2px 6px hsla(350, 80%, 50%, 0.9), -1px -1px 1px 6px hsla(350, 80%, 100%, 0.9), 0px 0px 2px 11px hsla(350, 80%, 50%, 0.9), 0px 0px 1px 12px hsla(350, 80%, 40%, 0.9), 1px 3px 14px 14px hsla(350, 80%, 0%, 0.4); */
+    }
 
     .button:active {
         color: hsla(350, 0%, 85%, 1);
@@ -170,16 +174,45 @@
 </style>
 
 <script>
-    var walkieTalkieButton = document.querySelector('.walkie-talkie');
+    // var walkieTalkieButton = document.querySelector('.walkie-talkie');
 
-    walkieTalkieButton.addEventListener('mousedown', buttonDown, false);
-    walkieTalkieButton.addEventListener('mouseup', buttonUp, false);
+    // walkieTalkieButton.addEventListener('mousedown', buttonDown, false);
+    // walkieTalkieButton.addEventListener('mouseup', buttonUp, false);
 
-    function buttonDown() {
-        walkieTalkieButton.classList.add('down-state');
+    // function buttonDown() {
+    //     walkieTalkieButton.classList.add('down-state');
+    // }
+
+    // function buttonUp() {
+    //     walkieTalkieButton.classList.remove('down-state');
+    // }
+
+
+
+    function submitForm() {
+        const form = document.getElementById("myOrders");
+        const userId = localStorage.getItem("userId");
+
+        // Set the action and method of the form
+        form.setAttribute("action", "/myorders");
+        form.setAttribute("method", "post");
+
+        // Create a hidden input field to pass the userId
+        const userIdInput = document.createElement("input");
+        userIdInput.type = "hidden";
+        userIdInput.name = "userId";
+        userIdInput.value = userId;
+
+        // Append the hidden input field to the form
+        form.appendChild(userIdInput);
+
+        // Submit the form
+        form.submit();
     }
 
-    function buttonUp() {
-        walkieTalkieButton.classList.remove('down-state');
-    }
+    // Add event listener to the form submission
+    document.getElementById("my_orders").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        submitForm(); // Call the submitForm function
+    });
 </script>

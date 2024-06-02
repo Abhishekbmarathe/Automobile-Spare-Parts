@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
     name: {
@@ -26,6 +26,9 @@ const orderSchema = new mongoose.Schema({
     address: {
         type: String,
 
+    },
+    userId: {
+        type: String
     }
 }, {
     timestamps: true // Adds createdAt and updatedAt timestamps

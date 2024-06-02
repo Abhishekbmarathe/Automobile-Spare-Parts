@@ -120,7 +120,7 @@ app.get("/parts", async (req, res) => {
 
         console.log(image_id);
         // Ensure data is an array
-        const data = await parts.find({company : image_id}) || [];
+        const data = await parts.find({ company: image_id }) || [];
 
         // const data = await parts.find() || [];
 
@@ -177,7 +177,7 @@ app.get("/useradress", (req, res) => {
 
 
 // route for navigation
-app.get('/navigate', (req, res) => {
+app.get('/navigate', async (req, res) => {
     const { action } = req.query;
     switch (action) {
         case 'home':
@@ -192,10 +192,6 @@ app.get('/navigate', (req, res) => {
             // Redirect to My Cart page
             res.render("mycart.ejs");
             break;
-        case 'my_orders':
-            // Redirect to My order page
-            res.render("myorder.ejs");
-            break;
 
         default:
             // Handle unknown action
@@ -203,6 +199,12 @@ app.get('/navigate', (req, res) => {
     }
 });
 
+
+app.post("/myorders", async (req, res) => {
+    const orderss = await orders.find({ userId: req.body.userId });
+    console.log(orderss);
+    res.render("myorder",{orderss});
+})
 
 // Route for rendering the cardspay page
 app.get("/cardspay", (req, res) => {
@@ -248,8 +250,10 @@ app.post("/usersignin", async (req, res) => {
     const data = req.body;
     const Login = new login(data); // Creating a new login instance with user data
     await Login.save(); // Saving the user data to the database
+
+    const user = await login.findOne({ email: req.body.email });
     console.log(req.body); // Logging the user data
-    res.render("home"); // Rendering the home page after signup
+    res.render("home", { userId: user._id }); // Rendering the home page after signup
 })
 app
 
@@ -279,8 +283,8 @@ app.post("/userlogin", async (req, res) => {
         } else if (user.password !== password) {
             return res.status(401).send("Invalid password");
         }
-        req.session.user = { id: user._id, username: user.email };
-        res.render("home");
+        // req.session.user = { id: user._id, username: user.email };
+        res.render("home", { userId: user._id });
 
     } catch (error) {
         console.error("Error:", error);
