@@ -19,13 +19,16 @@ const productSchema = new mongoose.Schema({
     stock: {
         type: String,
         required: true,
-       
+
     },
-    itemimg:{
-        type:String
+    itemimg: {
+        type: String
     },
-    model:{
-        type:String
+    model: {
+        type: String
+    },
+    company: {
+        type: String
     }
 
 });

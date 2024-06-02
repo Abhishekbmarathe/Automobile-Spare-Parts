@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Order Page</title>
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" type="text/css" href="styles/style2.css">
+    <!-- Link to Razorpay checkout script -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
+        /* Styling for the body */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #c0bdbd;
@@ -20,6 +23,7 @@
             position: relative;
         }
 
+        /* Styling for the form container */
         .form-container {
             background-color: rgba(206, 200, 200, 0.3);
             padding: 20px;
@@ -42,6 +46,7 @@
             color: #333;
         }
 
+        /* Styling for input fields */
         input[type="text"],
         input[type="email"],
         input[type="tel"],
@@ -116,6 +121,7 @@
             margin-right: 10px;
         }
 
+        /* Background animation styling */
         .context {
             width: 100%;
             position: absolute;
@@ -253,6 +259,7 @@
 
 <body>
 
+    <!-- Background animation area -->
     <div class="area">
         <ul class="circles">
             <li></li>
@@ -267,27 +274,35 @@
             <li></li>
         </ul>
     </div>
+
+    <!-- Form container -->
     <div class="form-container">
         <h1>Place Your Order</h1>
         <form id="food-order-form">
+            <!-- Name input -->
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
+            <!-- Email input -->
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
+            <!-- Phone input -->
             <label for="phone">Phone:</label>
             <input type="tel" id="phone" name="phone" required>
 
+            <!-- Payment method selection -->
             <fieldset>
                 <legend>Payment Method:</legend>
                 <label><input type="radio" name="payment" value="credit_debit" required>make online payment</label>
                 <label><input type="radio" name="payment" checked value="cash"> Cash on delivery</label>
             </fieldset>
 
+            <!-- Address input -->
             <label for="address">Address:</label>
             <textarea id="address" name="address" rows="4" required></textarea>
 
+            <!-- Submit and payment buttons -->
             <button type="submit" id="submitOrderBtn">Submit Order</button>
             <button type="button" id="payBtn">Pay with Razorpay</button>
         </form>
@@ -299,12 +314,14 @@
             const submitBtn = document.getElementById('submitOrderBtn');
             const payBtn = document.getElementById('payBtn');
 
+            // Function to toggle the visibility of submit and pay buttons based on selected payment method
             function togglePaymentButton() {
                 const isCreditDebit = document.querySelector('input[name="payment"]:checked').value === "credit_debit";
                 submitBtn.style.display = isCreditDebit ? 'none' : 'inline';
                 payBtn.style.display = isCreditDebit ? 'inline' : 'none';
             }
 
+            // Add event listener to each payment method radio button
             paymentMethods.forEach(function (payment) {
                 payment.addEventListener('change', togglePaymentButton);
             });
@@ -312,6 +329,7 @@
             togglePaymentButton();  // Initial check on page load
         });
 
+        // Add event listener to the form to handle submission
         document.getElementById('food-order-form').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
             if (!confirm('Are you sure you want to submit this order?')) {
@@ -321,6 +339,7 @@
             submitOrderForm();
         });
 
+        // Function to handle form submission
         function submitOrderForm() {
             const form = document.getElementById('food-order-form');
             form.setAttribute('action', '/submit'); // Set the action to the desired URL
@@ -337,6 +356,7 @@
             sessionStorage.clear(); // Clear localStorage after submission
         }
 
+        // Function to append hidden input fields to the form
         function appendHiddenInput(form, name, value) {
             const input = document.createElement('input');
             input.type = 'hidden';
@@ -345,6 +365,7 @@
             form.appendChild(input);
         }
 
+        // Add event listener to the pay button to initiate Razorpay payment
         document.getElementById('payBtn').addEventListener('click', async () => {
             const orderItems = JSON.parse(sessionStorage.getItem('spareItems'));
             let totalAmount = parseFloat(orderItems[orderItems.length - 1].price);
@@ -353,6 +374,7 @@
             const cname = document.querySelector('#name').value;
             const contact = document.querySelector('#phone').value;
 
+            // Fetch order data from the server
             const orderResponse = await fetch('/create-order', {
                 method: 'POST',
                 headers: {
@@ -363,6 +385,7 @@
 
             const orderData = await orderResponse.json();
 
+            // Razorpay payment options
             var options = {
                 "key": "rzp_test_rZ9XdkGjHcXsd6", // Replace this with your actual Razorpay key ID
                 "amount": totalAmount * 100,
@@ -390,6 +413,7 @@
             paymentObject.open();
         });
 
+        // Function to verify payment on the server
         function verifyPayment(orderId, paymentId, signature) {
             fetch('/verify-payment', {
                 method: 'POST',

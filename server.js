@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'; // Middleware for parsing request bodies
 import path from 'path'; // Module for handling file paths
 import mongoose from 'mongoose'; // MongoDB object modeling tool
 import login from './models/login.js'; // Importing login model (Assuming it's a Mongoose model)
-import parts from './models/parts.js'
+import parts from './models/parts.js';
 import nodemailer from 'nodemailer'; // Library for sending emails
 import OTPGenerator from 'otp-generator'; // Library for generating OTPs
 import session from 'express-session';
@@ -118,9 +118,11 @@ app.get("/parts", async (req, res) => {
     try {
         const { image_id } = req.query;
 
+        console.log(image_id);
         // Ensure data is an array
-        // const data = await parts.find(req.query) || [];
-        const data = await parts.find() || [];
+        const data = await parts.find({company : image_id}) || [];
+
+        // const data = await parts.find() || [];
 
         switch (image_id) {
             case "re":
@@ -177,7 +179,6 @@ app.get("/useradress", (req, res) => {
 // route for navigation
 app.get('/navigate', (req, res) => {
     const { action } = req.query;
-
     switch (action) {
         case 'home':
             // Redirect to HOME page
