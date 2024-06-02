@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        /* Add your CSS styles here */
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .order-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .order-item h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        li strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Returned Items Details</h1>
+    <% if (returnedItems.length===0) { %>
+        <p>No items</p>
+        <% } else { %>
+            <% returnedItems.forEach(item=> { %>
+                <div class="order-item">
+                    <h2>Order <%= item.orderId %>
+                    </h2>
+                    <ul>
+                        <li><strong>Name:</strong>
+                            <%= item.name %>
+                        </li>
+                        <li><strong>Price:</strong>
+                            <%= item.price %>
+                        </li>
+                        <li><strong>Item Name:</strong>
+                            <%= item.itemName %>
+                        </li>
+                        <li><strong>Email:</strong>
+                            <%= item.email %>
+                        </li>
+                        <li><strong>Phone:</strong>
+                            <%= item.phone %>
+                        </li>
+                        <li><strong>Payment:</strong>
+                            <%= item.payment %>
+                        </li>
+                        <li><strong>Address:</strong>
+                            <%= item.address %>
+                        </li>
+                        <li><strong>Order Id:</strong>
+                            <%= item.orderId %>
+                        </li>
+                        <li><strong>Reason:</strong>
+                            <%= item.reason%>
+                        </li>
+                    </ul>
+                </div>
+                <% }); %>
+                    <% } %>
+</body>
+
+</html>

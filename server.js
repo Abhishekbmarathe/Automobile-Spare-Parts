@@ -12,6 +12,7 @@ import { config } from 'dotenv';
 await config();
 import multer from 'multer';
 import orders from './models/orders.js'
+import Return from './models/return.js'
 import Razorpay from 'razorpay';
 
 
@@ -200,10 +201,12 @@ app.get('/navigate', async (req, res) => {
 });
 
 
+
+
 app.post("/myorders", async (req, res) => {
     const orderss = await orders.find({ userId: req.body.userId });
-    console.log(orderss);
-    res.render("myorder",{orderss});
+    // console.log(orderss);
+    res.render("myorder", { orderss });
 })
 
 // Route for rendering the cardspay page
@@ -233,8 +236,27 @@ app.get("/upi", (req, res) => {
 
 // Route for rendering the codetails page
 app.get("/codetails", async (req, res) => {
-    const orderDetails = await orders.find({});
-    res.render("codetails", { orderDetails });
+
+    const exp = req.query.navbtn
+    // console.log(req.query.navbtn)
+
+    switch (exp) {
+        case 'order':
+            const orderDetails = await orders.find({});
+            res.render("codetails", { orderDetails });
+            break;
+        case 'return':
+            const returnedItems = await Return.find({});
+            res.render("return", { returnedItems });
+            break;
+        default:
+            res.send("invalid page");
+            break;
+
+    }
+
+
+
 })
 
 app.get("/buynow", (req, res) => {
@@ -245,10 +267,26 @@ app.post("/logout", (req, res) => {
     res.render("logout")
 })
 
-app.post("/return-product",(req,res)=>{
-    console.log(req.body)
-    res.json("product returned succefully your money will be refunded within 7 business working days");
-})
+app.post("/return-product", async (req, res) => {
+    try {
+        const retData = new Return(req.body);
+        // console.log("return data = ",req.body)
+        // console.log("return data = ",retData)
+        await retData.save();
+        // await Return.deleteMany({});
+        res.json("Product returned successfully. Your money will be refunded within 7 business working days.");
+    } catch (error) {
+        if (error.code === 11000 && error.keyPattern && error.keyPattern.orderId) {
+            // Duplicate orderId error
+            res.status(409).json("Order ID already exists. Please use a unique Order ID.");
+        } else {
+            // Other errors
+            console.error(error);
+            res.status(500).json("An error occurred while processing your request. Please try again later.");
+        }
+    }
+});
+
 
 // Route for handling user sign up
 app.post("/usersignin", async (req, res) => {
