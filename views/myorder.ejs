@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Return Product</title>
+    <title>My Orders</title>
     <style>
-        /* Basic styling */
+        /* Basic styling for the body */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -15,64 +15,199 @@
             color: #333;
         }
 
+        /* Styling for the container */
         .container {
-            max-width: 600px;
+            max-width: 1000px;
             margin: 50px auto;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* Styling for the header */
         h2 {
             text-align: center;
             margin-bottom: 20px;
         }
 
+        /* Styling for each order item */
+        .order-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Removing the border from the last order item */
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Styling for product images */
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for product details */
+        .product-details {
+            text-align: center;
+        }
+
+        .product-details div {
+            margin-bottom: 5px;
+        }
+
+        /* Styling for the return button */
+        .return-button {
+            background-color: #dc3545;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Styling for the return button on hover */
+        .return-button:hover {
+            background-color: #c82333;
+        }
+
+        /* Styling for the return form */
+        .return-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Styling for labels */
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
         }
 
+        /* Styling for select, textarea, input, and button elements */
         select,
         textarea,
+        input[type="text"],
         button {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
 
-        button {
+        /* Styling for submit button */
+        button[type="submit"] {
             background-color: #28a745;
             color: #fff;
             cursor: pointer;
         }
 
-        button:hover {
+        /* Styling for submit button on hover */
+        button[type="submit"]:hover {
             background-color: #218838;
         }
     </style>
+    <script>
+        // Function to toggle the visibility of the return form
+        function toggleReturnForm(id) {
+            const form = document.getElementById(`returnForm-${id}`);
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Function to show an alert when the return form is submitted
+        function showRefundAlert(event) {
+            event.preventDefault(); // Prevent the default form submission
+            alert("Your money will be refunded in a few days."); // Display the alert message
+            // Optionally submit the form here if needed
+            // event.target.submit();
+        }
+    </script>
 </head>
 
 <body>
 
     <div class="container">
-        <h2>Return Product</h2>
-        <form action="/submit-return" method="post">
-            <label for="returnReason">Reason for Return:</label>
-            <select id="returnReason" name="returnReason" required>
-                <option value="" disabled selected>Select a reason</option>
-                <option value="wrongProduct">Wrong Product</option>
-                <option value="damagedProduct">Damaged Product</option>
-            </select>
+        <h2>My Orders</h2>
 
-            <label for="comments">Additional Comments:</label>
-            <textarea id="comments" name="comments" rows="4" placeholder="Provide any additional details..." required></textarea>
+        <!-- Order item 1 -->
+        <div class="order-item">
+            <img src="product-image-1.jpg" alt="Product Image 1" class="product-image">
+            <div class="product-details">
+                <div class="item-name">Item Name 1</div>
+                <div class="item-description">Description of item 1. This is a brief description of the product.</div>
+                <div class="item-price">$19.99</div>
+            </div>
+            <!-- Return button -->
+            <button class="return-button" onclick="toggleReturnForm(1)">Return</button>
+        </div>
 
-            <button type="submit">Return Product</button>
-        </form>
+        <!-- Return form for order item 1 -->
+        <div class="return-form" id="returnForm-1">
+            <form action="/submit-return" method="post" onsubmit="showRefundAlert(event)">
+                <label for="productName-1">Product Name:</label>
+                <input type="text" id="productName-1" name="productName" value=" " required>
+
+                <label for="returnReason-1">Reason for Return:</label>
+                <select id="returnReason-1" name="returnReason" required>
+                    <option value="" disabled selected>Select a reason</option>
+                    <option value="wrongProduct">Wrong Product</option>
+                    <option value="damagedProduct">Damaged Product</option>
+                </select>
+
+                <label for="comments-1">Additional Comments:</label>
+                <textarea id="comments-1" name="comments" rows="4" placeholder="Provide any additional details..." required></textarea>
+
+                <button type="submit">Return Product</button>
+            </form>
+        </div>
+
+        <!-- Order item 2 -->
+        <div class="order-item">
+            <img src="product-image-2.jpg" alt="Product Image 2" class="product-image">
+            <div class="product-details">
+                <div class="item-name">Item Name 2</div>
+                <div class="item-description">Description of item 2. This is a brief description of the product.</div>
+                <div class="item-price">$29.99</div>
+            </div>
+            <!-- Return button -->
+            <button class="return-button" onclick="toggleReturnForm(2)">Return</button>
+        </div>
+
+        <!-- Return form for order item 2 -->
+        <div class="return-form" id="returnForm-2">
+            <form action="/submit-return" method="post" onsubmit="showRefundAlert(event)">
+                <label for="productName-2">Product Name:</label>
+                <input type="text" id="productName-2" name="productName" value="Item Name 2" readonly>
+
+                <label for="returnReason-2">Reason for Return:</label>
+                <select id="returnReason-2" name="returnReason" required>
+                    <option value="" disabled selected>Select a reason</option>
+                    <option value="wrongProduct">Wrong Product</option>
+                    <option value="damagedProduct">Damaged Product</option>
+                </select>
+
+                <label for="comments-2">Additional Comments:</label>
+                <textarea id="comments-2" name="comments" rows="4" placeholder="Provide any additional details..." required></textarea>
+
+                <button type="submit">Return Product</button>
+            </form>
+        </div>
+
+        <!-- Add more order items as needed -->
+
     </div>
 
 </body>
