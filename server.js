@@ -95,6 +95,11 @@ app.get('/log', (req, res) => {
     res.render("login.ejs");
 })
 
+//return render
+// app.get('/', (req, res) => {
+//     res.render("return.ejs");
+// })
+
 
 
 
@@ -186,6 +191,11 @@ app.get('/navigate', (req, res) => {
             // Redirect to My Cart page
             res.render("mycart.ejs");
             break;
+        case 'my_orders':
+            // Redirect to My order page
+            res.render("myorder.ejs");
+            break;
+
         default:
             // Handle unknown action
             res.status(404).send('Invalid action');
