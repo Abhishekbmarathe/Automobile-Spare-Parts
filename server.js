@@ -245,6 +245,11 @@ app.post("/logout", (req, res) => {
     res.render("logout")
 })
 
+app.post("/return-product",(req,res)=>{
+    console.log(req.body)
+    res.json("product returned succefully your money will be refunded within 7 business working days");
+})
+
 // Route for handling user sign up
 app.post("/usersignin", async (req, res) => {
     const data = req.body;

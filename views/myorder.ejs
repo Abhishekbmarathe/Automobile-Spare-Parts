@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders</title>
     <style>
-        body{
+        body {
             background-color: grey;
         }
+
         .orders-container {
             width: 80%;
             margin: auto;
@@ -54,21 +56,76 @@
         .return-button:hover {
             background-color: #45a049;
         }
+
+
+
+            .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
     <div class="orders-container">
         <h1>My Orders</h1>
-        <% orderss.forEach(order => { %>
+        <% orderss.forEach(order=> { %>
             <div class="order-card">
-                <h2>Order: <%= order.name %></h2>
-                <p><strong>Price:</strong> <%= order.price %></p>
-                <p><strong>Item Name:</strong> <%= order.itemName %></p>
-                <p><strong>Email:</strong> <%= order.email %></p>
-                <p><strong>Phone:</strong> <%= order.phone %></p>
-                <p><strong>Payment:</strong> <%= order.payment %></p>
-                <p><strong>Address:</strong> <%= order.address %></p>
-                <p><strong>Order Date:</strong> <%= order.createdAt.toDateString() %></p>
+                <h2>Order: <%= order.name %>
+                </h2>
+                <p><strong>Price:</strong>
+                    <%= order.price %>
+                </p>
+                <p><strong>Item Name:</strong>
+                    <%= order.itemName %>
+                </p>
+                <p><strong>Email:</strong>
+                    <%= order.email %>
+                </p>
+                <p><strong>Phone:</strong>
+                    <%= order.phone %>
+                </p>
+                <p><strong>Payment:</strong>
+                    <%= order.payment %>
+                </p>
+                <p><strong>Address:</strong>
+                    <%= order.address %>
+                </p>
+                <p><strong>Order Date:</strong>
+                    <%= order.createdAt.toDateString() %>
+                </p>
                 <!-- Assuming you have an endpoint like /return-product to handle return requests -->
                 <form action="/return-product" method="post">
                     <!-- Include any necessary hidden fields, like order ID, for processing -->
@@ -76,7 +133,66 @@
                     <button type="submit" class="return-button">Return Product</button>
                 </form>
             </div>
-        <% }); %>
+            <% }); %>
     </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Find all return buttons
+            const returnButtons = document.querySelectorAll(".return-button");
+
+            // Add click event listener to each return button
+            returnButtons.forEach(button => {
+                button.addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevent default form submission
+
+
+                    console.log("return button clicked");
+                    // Get the parent order-card element
+                    const orderCard = event.target.closest(".order-card");
+
+                    // Extract order details from the order card
+                    const order = {
+                        name: orderCard.querySelector('h2').textContent.replace('Order: ', ''),
+                        price: orderCard.querySelector('p:nth-of-type(1)').textContent.replace('Price: ', ''),
+                        itemName: orderCard.querySelector('p:nth-of-type(2)').textContent.replace('Item Name: ', ''),
+                        email: orderCard.querySelector('p:nth-of-type(3)').textContent.replace('Email: ', ''),
+                        phone: orderCard.querySelector('p:nth-of-type(4)').textContent.replace('Phone: ', ''),
+                        payment: orderCard.querySelector('p:nth-of-type(5)').textContent.replace('Payment: ', ''),
+                        address: orderCard.querySelector('p:nth-of-type(6)').textContent.replace('Address: ', ''),
+                        orderId: orderCard.querySelector('input[name="orderId"]').value
+                    };
+
+                    // Make the AJAX request
+                    fetch('/return-product', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(order),
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Handle the response from the server
+                            alert(data);
+                            // You can add further logic here based on the server response
+                        })
+                        .catch(error => {
+                            console.error('There was a problem with the fetch operation:', error);
+                        });
+                });
+            });
+        });
+
+    </script>
+
+
 </body>
+
 </html>
