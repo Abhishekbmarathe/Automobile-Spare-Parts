@@ -315,6 +315,8 @@
             <table id="productTable">
                 <thead>
                     <tr>
+                        <th>company</th>
+                        <th>model</th>
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Stock</th>
@@ -330,9 +332,15 @@
                             <% data.forEach(function(product) { %>
                                 <tr>
                                     <td>
+                                        <%= product.company %>
+                                    </td>
+                                    <td>
+                                        <%= product.model %>
+                                    </td>
+                                    <td>
                                         <%= product.productName %>
                                     </td>
-                                    <td>$<%= product.price.toFixed(2) %>
+                                    <td>Rs <%= product.price.toFixed(2) %>
                                     </td>
                                     <td>
                                         <%= product.stock %>
