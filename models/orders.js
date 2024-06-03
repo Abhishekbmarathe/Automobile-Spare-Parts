@@ -8,7 +8,9 @@ const orderSchema = new mongoose.Schema({
     price: {
         type: String
     },
-    itemName: String,
+    itemName:{ 
+        type:String
+    },
     email: {
         type: String,
         required: true,
