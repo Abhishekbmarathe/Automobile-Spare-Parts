@@ -15,7 +15,7 @@
     .boxes {
         /* border: 2px solid red; */
         width: 74%;
-        height: 700px;
+        /* height: 700px; */
     }
 
     .boxes:nth-child(1) {
@@ -283,7 +283,53 @@
                 document.getElementById('motorcycleForm').submit();
             }
 
+            // Add the new item to the cartItems array
+            spareItems.push(newItem);
+                localStorage.setItem('spareItems', JSON.stringify(spareItems));
 
+                setTimeout(() => {
+                    alert("item added to cart")
+
+                }, 100);// storing my cards details in local storage
+
+function addToCart(button) {
+    console.log(button);
+
+
+    const name = button.getAttribute("item-name");
+    const price = button.getAttribute("item-price");
+    const model = button.getAttribute("item-model");
+    const itemImg = button.getAttribute("item-img");
+
+    let spareItems = localStorage.getItem('spareItems');
+
+    // If cartItems is null, initialize it as an empty array
+    if (!spareItems) {
+        spareItems = [];
+    } else {
+        // Parse the JSON string to convert it back to an array
+        spareItems = JSON.parse(spareItems);
+    }
+
+    // Create a new item object
+    const newItem = {
+        name: name,
+        price: price,
+        model: model,
+        itemImg: itemImg
+    };
+
+    // Add the new item to the cartItems array
+    spareItems.push(newItem);
+    localStorage.setItem('spareItems', JSON.stringify(spareItems));
+
+    setTimeout(() => {
+        alert("item added to cart")
+
+    }, 100);
+}
+
+            
 
 
             // Function to submit the form

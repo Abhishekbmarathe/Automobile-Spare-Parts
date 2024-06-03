@@ -205,8 +205,9 @@ app.get('/navigate', async (req, res) => {
 
 app.post("/myorders", async (req, res) => {
     const orderss = await orders.find({ userId: req.body.userId });
-    // console.log(orderss);
-    res.render("myorder", { orderss });
+    console.log(orderss);
+    
+    res.render("myorder",{orderss});
 })
 
 // Route for rendering the cardspay page
@@ -236,6 +237,7 @@ app.get("/upi", (req, res) => {
 
 // Route for rendering the codetails page
 app.get("/codetails", async (req, res) => {
+
 
     const exp = req.query.navbtn
     // console.log(req.query.navbtn)
