@@ -11,7 +11,6 @@ const loginSchema = new Schema({
     password: {
         type: String,
         required: true
-    
     },
     email: {
         type: String,
@@ -23,9 +22,9 @@ const loginSchema = new Schema({
         required: true,
         unique: true
     },
-    // otp: {
-    //     type: Number // Change the type to Number
-    // }
+    otp: {
+        type: Number // Change the type to Number
+    }
     // You can add more fields like name, role, etc. based on your requirements
 }, { timestamps: true });
 
