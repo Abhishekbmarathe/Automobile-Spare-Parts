@@ -184,8 +184,8 @@
 
                     <select id="motorcycle" name="motorcycle" onchange="filterItems()">
                         <option value="">Select a model</option>
-                        <option value="access125">Access 125</option>
-                        <option value="gixer150/250">Gixer 150/250</option>
+                        <option value="access125">access 125</option>
+                        <option value="gixer">gixer</option>
                         
                         
                     </select>
@@ -203,12 +203,16 @@
                                 <p class="item-price">
                                     <%= item.price %> Rs
                                 </p>
-                                <p class="item-description">
+                                <p class="item-model">
                                     <%= item.model %>
+                                </p>
+                                <p class="item-description">
+                                    <%= item.description %>
                                 </p>
                                 <form action="/buynow" method="get">
                                     <button type="button" class="btn" item-name="<%= item.productName %>"
                                         item-price="<%= item.price %>" item-model="<%= item.model %>"
+                                        item-description="<%= item.description %>"
                                         item-img="<%= item.itemimg %>" onclick="addToCart(this)">Add to Cart</button>
                                     <button type="submit" class="btn buy-now" item-name="<%= item.productName %>"
                                         item-price="<%= item.price %>" onclick="buynow(this)">Buy Now</button>

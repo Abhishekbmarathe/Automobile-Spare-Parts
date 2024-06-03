@@ -203,12 +203,16 @@
                                 <p class="item-price">
                                     <%= item.price %> Rs
                                 </p>
-                                <p class="item-description">
+                                <p class="item-model">
                                     <%= item.model %>
+                                </p>
+                                <p class="item-description">
+                                    <%= item.description %>
                                 </p>
                                 <form action="/buynow" method="get">
                                     <button type="button" class="btn" item-name="<%= item.productName %>"
                                         item-price="<%= item.price %>" item-model="<%= item.model %>"
+                                        item-description="<%= item.description %>"
                                         item-img="<%= item.itemimg %>" onclick="addToCart(this)">Add to Cart</button>
                                     <button type="submit" class="btn buy-now" item-name="<%= item.productName %>"
                                         item-price="<%= item.price %>" onclick="buynow(this)">Buy Now</button>
