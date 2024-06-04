@@ -23,16 +23,20 @@
             <button type="submit" name="action" value="about_us" class="under">ABOUT US</button>
             <button type="submit" name="action" value="my_cart" class="under">My Cart</button>
         </form>
-        
+
     </div>
     <form id="myOrders">
         <button type="submit" class="under" id="my_orders">My orders</button>
     </form>
 
 
+    <form id="logout-form" method="get">
+        <button type="submit" class="button">Logout</button>
+    </form>
 
 
-    <button class="button">Logout</button>
+
+
 </header>
 
 <style>
@@ -214,5 +218,23 @@
     document.getElementById("my_orders").addEventListener("click", function (event) {
         event.preventDefault(); // Prevent the default form submission
         submitForm(); // Call the submitForm function
+    });
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const logoutForm = document.getElementById("logout-form");
+
+        logoutForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            // Clear userId from local storage
+            localStorage.removeItem("userId");
+
+            // Log a message to confirm that userId is cleared
+            console.log("userId is cleared from local storage:", localStorage.getItem("userId"));
+
+            // Optionally, redirect to the logout route
+            window.location.href = "/logout"; // Redirect to the logout route
+        });
     });
 </script>
