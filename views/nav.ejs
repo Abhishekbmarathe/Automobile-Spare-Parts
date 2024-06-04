@@ -1,137 +1,52 @@
 <link rel="stylesheet" href="/styles/style.css">
 <link rel="stylesheet" href="/styles/utils.css">
 
-
-<!-- <div class="spar">
-    <h1>AUTOMOBILE SPARE PARTS</h1>
-</div> -->
-
-<style>
-    .navForm button {
-        background: none;
-        border: none;
-    }
-</style>
 <header>
     <div class="logo"><a href="#">
             <h2>NUTS & BOLTZZ</h2>
         </a></div>
     <div class="menu flex">
         <form action="/navigate" class="navForm flex gap-2" method="get">
-            <button type="submit" name="action" value="home" class="under">HOME</button>
-            <button type="submit" name="action" value="contact_us" class="under">CONTACT US</button>
-            <button type="submit" name="action" value="about_us" class="under">ABOUT US</button>
-            <button type="submit" name="action" value="my_cart" class="under">My Cart</button>
+            <button type="submit" name="action" value="home" class="under nav-button">HOME</button>
+            <button type="submit" name="action" value="contact_us" class="under nav-button">CONTACT US</button>
+            <button type="submit" name="action" value="about_us" class="under nav-button">ABOUT US</button>
+            <button type="submit" name="action" value="my_cart" class="under nav-button">MY CART</button>
         </form>
-        
     </div>
     <form id="myOrders">
-        <button type="submit" class="under" id="my_orders">My orders</button>
+        <button type="submit" class="under nav-button" id="my_orders">MY ORDERS</button>
     </form>
-
-
-
-
-    <button class="button">Logout</button>
+    <button class="button logout-button">LOGOUT</button>
 </header>
 
 <style>
-    .spar {
-        width: 100%;
-        text-align: center;
-        background-color: #026eb1;
-        color: rgb(6, 6, 6);
-        /* height: 4em; */
+    .navForm button {
+        background: none;
+        border: none;
+    }
+
+    .menu,
+    #myOrders {
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 15px;
+        gap: 10px;
     }
 
-    .spar h1 {
-        margin: 0;
-
-    }
-
-
-    .search-box {
-        width: fit-content;
-        height: fit-content;
-        position: relative;
-    }
-
-    .input-search {
-        height: 50px;
-        width: 50px;
-        border-style: none;
-        padding: 10px;
-        font-size: 18px;
-        letter-spacing: 2px;
-        outline: none;
-        border-radius: 25px;
-        transition: all .5s ease-in-out;
-        background-color: #22a6b3;
-        padding-right: 40px;
+    .nav-button {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 16px;
         color: #fff;
-    }
-
-    .input-search::placeholder {
-        color: rgba(255, 255, 255, .5);
-        font-size: 18px;
-        letter-spacing: 2px;
-        font-weight: 100;
-    }
-
-    .btn-search {
-        width: 50px;
-        height: 50px;
-        border-style: none;
-        font-size: 20px;
-        font-weight: bold;
-        outline: none;
+        background-color: #026eb1;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
         cursor: pointer;
-        border-radius: 50%;
-        position: absolute;
-        right: 0px;
-        color: #ffffff;
-        background-color: transparent;
-        pointer-events: painted;
+        transition: background-color 0.3s ease-in-out;
     }
 
-    .btn-search:focus~.input-search {
-        width: 300px;
-        border-radius: 0px;
-        background-color: transparent;
-        border-bottom: 1px solid rgba(255, 255, 255, .5);
-        transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    .nav-button:hover {
+        background-color: #025a90;
     }
-
-    .input-search:focus {
-        width: 300px;
-        border-radius: 0px;
-        background-color: transparent;
-        border-bottom: 1px solid rgba(255, 255, 255, .5);
-        transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
-    }
-
-
-
-
-    /* Assuming pre-calculated colors based on your SCSS values */
-    :root {
-        --colour: hsla(350, 100%, 25%, 1);
-        --grey: #262626;
-        /* equivalent to desaturate($colour, 90%) */
-        --light-grey: #595959;
-        /* equivalent to lighten($grey, 30%) */
-        --lightened-grey-18: #474747;
-        /* rough equivalent to lighten($grey, 18%) */
-        --lightened-grey-25: #404040;
-        /* rough equivalent to lighten($grey, 25%) */
-        --lightened-grey-35: #333333;
-        /* rough equivalent to lighten($grey, 35%) */
-    }
-
 
     .button {
         transform: scale(.8);
@@ -140,7 +55,6 @@
         font-size: 16px;
         color: hsla(350, 0%, 100%, 1);
         text-shadow: -1px -1px 1px hsla(350, 0%, 0%, 0.7), 1px 1px 1px hsla(350, 0%, 100%, 0.3);
-        /* display: block; */
         margin: 0;
         padding: 10px 27px;
         cursor: pointer;
@@ -148,7 +62,6 @@
         background-image: linear-gradient(273deg, hsla(350, 80%, 60%, 1) 30%, hsla(350, 80%, 50%, 1) 40%);
         border: none;
         border-radius: 16px;
-        /* box-shadow: inset 0px 0px 1px 1px hsla(350, 80%, 30%, 0.9), inset 0px 0px 2px 3px hsla(350, 80%, 50%, 0.9), inset 1px 1px 1px 4px hsla(350, 80%, 100%, 0.8), inset 0px 0px 2px 7px hsla(350, 80%, 60%, 0.8), inset 0px 0px 4px 10px hsla(350, 80%, 50%, 0.9), 8px 10px 2px 6px hsla(350, 80%, 20%, 0.55), 0px 0px 3px 2px hsla(350, 80%, 40%, 0.9), 0px 0px 2px 6px hsla(350, 80%, 50%, 0.9), -1px -1px 1px 6px hsla(350, 80%, 100%, 0.9), 0px 0px 2px 11px hsla(350, 80%, 50%, 0.9), 0px 0px 1px 12px hsla(350, 80%, 40%, 0.9), 1px 3px 14px 14px hsla(350, 80%, 0%, 0.4); */
     }
 
     .button:active {
@@ -157,7 +70,6 @@
         background-image:
             linear-gradient(273deg, hsla(350, 80%, 50%, 1) 50%, hsla(350, 80%, 55%, 1) 60%);
         box-shadow:
-            /* Adjusted shadows for active state */
             inset 3px 4px 3px 2px hsla(350, 80%, 20%, 0.55),
             inset 0px 0px 1px 1px hsla(350, 80%, 30%, 0.9),
             inset -1px -1px 2px 3px hsla(350, 80%, 50%, 0.9),
@@ -171,7 +83,24 @@
             0px 0px 1px 12px hsla(350, 80%, 40%, 0.9),
             1px 3px 14px 14px hsla(350, 80%, 0%, 0.4);
     }
+
+    .logout-button {
+        transform: scale(.8);
+        outline: none;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 16px;
+        color: hsla(350, 0%, 100%, 1);
+        text-shadow: -1px -1px 1px hsla(350, 0%, 0%, 0.7), 1px 1px 1px hsla(350, 0%, 100%, 0.3);
+        margin: 0;
+        padding: 10px 27px;
+        cursor: pointer;
+        background-color: hsla(350, 80%, 10%, 1);
+        background-image: linear-gradient(273deg, hsla(350, 80%, 60%, 1) 30%, hsla(350, 80%, 50%, 1) 40%);
+        border: none;
+        border-radius: 16px;
+    }
 </style>
+
 
 <script>
     // var walkieTalkieButton = document.querySelector('.walkie-talkie');
