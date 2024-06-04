@@ -421,6 +421,10 @@ app.post('/verify-payment', (req, res) => {
 });
 
 
+app.get("/logout", (req,res)=>{
+    res.render("index");;``
+})
+
 
 
 
