@@ -116,61 +116,57 @@
     }
     </style>
 
-<!-- <h2>Automatic Slideshow</h2>
-<p>Change image every 2 seconds:</p> -->
+<div class="slideshow-container">
 
-<!-- <div class="slideshow-container">
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="/res/2nd.jpg" style="width:100%">
+        <div class="text">"Life is short, so grip it and rip it."</div>
+    </div>
 
-    <div class="slideshow-container">
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="/res/2nd.jpg" style="width:100%">
+        <div class="text">"Riding a bike is like flying. All your senses are alive."</div>
+    </div>
 
-        <div class="mySlides fade">
-          <div class="numbertext">1 / 3</div>
-          <img src="/res/2nd.jpg" style="width:100%">
-          <div class="text">"Life is short, so grip it and rip it."</div>
-        </div>
-        
-        <div class="mySlides fade">
-          <div class="numbertext">2 / 3</div>
-          <img src="/res/2nd.jpg" style="width:100%">
-          <div class="text">"Riding a bike is like flying. All your senses are alive."</div>
-        </div>
-        
-        <div class="mySlides fade">
-          <div class="numbertext">3 / 3</div>
-          <img src="/res/2nd.jpg" style="width:100%">
-          <div class="text">"Two wheels move the soul."</div>
-        </div>
-        
-        </div> -->
-        <!-- <br>
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="/res/2nd.jpg" style="width:100%">
+        <div class="text">"Two wheels move the soul."</div>
+    </div>
+
+</div>
+<br>
 
 <div style="text-align:center">
-<span class="dot"></span> 
-<span class="dot"></span> 
-<span class="dot"></span> 
-</div> -->
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+</div>
 
 <script>
-let slideIndex = 0;
-showSlides();
+    let slideIndex = 0;
+    showSlides();
 
-function showSlides() {
-let i;
-let slides = document.getElementsByClassName("mySlides");
-let dots = document.getElementsByClassName("dot");
-for (i = 0; i < slides.length; i++) {
-slides[i].style.display = "none";  
-}
-slideIndex++;
-if (slideIndex > slides.length) {slideIndex = 1}    
-for (i = 0; i < dots.length; i++) {
-dots[i].className = dots[i].className.replace(" active", "");
-}
-slides[slideIndex-1].style.display = "block";  
-dots[slideIndex-1].className += " active";
-setTimeout(showSlides, 2000); // Change image every 2 seconds
-}
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
 </script>
+
 
 
 
@@ -255,59 +251,8 @@ setTimeout(showSlides, 2000); // Change image every 2 seconds
 
 
 
-        <footer class="flex">
-            <div class="footer0">
-                <h1>NUTS & BOLTZZ</h1>
-            </div>
-            <div class="footer1">
-                Connect with us at
-                <div class="social-media">
-                    <a href="#">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-linkedin"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-youtube"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                </div>
-            </div>
-            <div class="footer2">
-                <div class="product">
-                    <div class="heading">Products</div>
-                </div>
-                <div class="services">
-                    <div class="heading">Services</div>
-                    <div class="div">Return</div>
-                    <div class="div">Cash Back</div>
-                    <div class="div">Others</div>
-                </div>
-                <div class="Company">
-                    <div class="heading">Company</div>
-                    <div class="div">Complaint</div>
-                    <div class="div">Support</div>
-                </div>
-                <div class="Get Help">
-                    <div class="heading">Get Help</div>
-                    <div class="div">Help Center</div>
-                    <div class="div">Privacy Policy</div>
-                    <div class="div">Terms</div>
-                    <div class="div">Login</div>
-                </div>
-            </div>
-            <div class="footer3">
-                Copyright ©
-                <h4>NUTS & BOLTS</h4>
-                2021-2028
-            </div>
-        </footer>
+        <%- include('footer'); -%>
+
         <script src="/js/script.js"></script>
 </body>
 
