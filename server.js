@@ -392,7 +392,7 @@ app.post('/create-order', async (req, res) => {
         amount: req.body.price * 100,  // amount in the smallest currency unit
         currency: "INR",
         receipt: "order_rcptid_11"
-    };
+    }; 
 
     try {
         const order = await razorpay.orders.create(options);
