@@ -275,6 +275,8 @@
         </ul>
     </div>
 
+
+
     <!-- Form container -->
     <div class="form-container">
         <h1>Place Your Order</h1>
@@ -341,6 +343,14 @@
 
         // Function to handle form submission
         function submitOrderForm() {
+            if (!localStorage.getItem('userId')) {
+                // event.preventDefault();
+                alert("please login or signup to proceed...");
+                sessionStorage.clear();
+                // const form = document.getElementById('food-order-form').reset();
+
+                return; // Stop function execution if userId is not found
+            }
             const form = document.getElementById('food-order-form');
             form.setAttribute('action', '/submit'); // Set the action to the desired URL
             form.setAttribute('method', 'post'); // Set the method to POST
@@ -368,6 +378,13 @@
 
         // Add event listener to the pay button to initiate Razorpay payment
         document.getElementById('payBtn').addEventListener('click', async () => {
+            if (!localStorage.getItem('userId')) {
+                // event.preventDefault();
+                alert("please login or signup to proceed...");
+                // const form = document.getElementById('food-order-form').reset();
+
+                return; // Stop function execution if userId is not found
+            }
             const orderItems = JSON.parse(sessionStorage.getItem('spareItems'));
             let totalAmount = parseFloat(orderItems[orderItems.length - 1].price);
             const name = orderItems[orderItems.length - 1].name;
@@ -401,7 +418,7 @@
                     submitOrderForm();
                     verifyPayment(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature);
                 },
-                "prefill": { 
+                "prefill": {
                     "name": cname,
                     "email": email,
                     "contact": contact
