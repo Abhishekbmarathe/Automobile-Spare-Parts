@@ -206,6 +206,9 @@
                                 <p class="item-description">
                                     <%= item.model %>
                                 </p>
+                                <p class="item-stock">STOCK:
+                                    <%= item.stock %>
+                                </p>
                                 <form action="/buynow" method="get">
                                     <button type="button" class="btn" item-name="<%= item.productName %>"
                                         item-price="<%= item.price %>" item-model="<%= item.model %>"
